@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar';
 import ContactModal from '../../components/ContactModal';
 import PackagingModel from '../../components/PackagingModel';
 import { CopyEditorProvider } from '../../components/CopyEditorContext';
+import Footer from '../../components/Footer';
 
 const LEFT_STEPS = [
   { num: '01', title: 'Whole Guava Goodness', body: 'Crafted from 100% whole guava fruit — no artificial flavours, no preservatives. Every sip delivers the natural taste and nutrition of fresh guava straight from the orchard.', rotY: -0.28 },
@@ -193,10 +194,9 @@ function GuaviProbiContent() {
               Probiotic Guava Drink
             </p>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', lineHeight: 1.8, margin: isMobile || isTablet ? '0 auto 1.5rem' : '0 0 1.5rem 0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-              Experience the perfect blend of natural guava goodness and powerful probiotics. Each bottle delivers 100% whole guava fruit with live probiotic cultures that support your gut health and overall wellness.
-            </p>
+             Guava Probe is an advanced fruit quality assessment solution designed to deliver fast, accurate, and data-driven insights into guava maturity, freshness, and overall quality.  </p>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.85rem, 1vw, 0.95rem)', lineHeight: 1.75, margin: isMobile || isTablet ? '0 auto' : '0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-              No added sugar. No artificial preservatives. Just pure, nutritious refreshment crafted for your health-conscious lifestyle.
+             By enabling informed harvesting decisions, reducing post-harvest losses, and ensuring consistent fruit standards, it empowers growers, distributors, and retailers to improve efficiency, profitability, and sustainability across the agricultural supply chain.
             </p>
           </motion.div>
         </div>
@@ -338,14 +338,12 @@ function GuaviProbiContent() {
           style={{ maxWidth: 800, textAlign: 'center', zIndex: 10, position: 'relative' }}
         >
           <h2 style={{ fontFamily: "'Arial Black', 'Arial Bold', Arial, Impact, sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 1.5rem', lineHeight: 1.2, color: 'rgba(16,185,129,0.95)' }}>
-            Embrace Your Wellness Journey
+            TRANSFORMING FRUIT QUALITY WITH DATA
           </h2>
           <p style={{ fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: '1.5rem 0', fontWeight: 400 }}>
-            Guava Probi represents more than just a beverage — it&apos;s a commitment to your health and vitality. With every sip, you&apos;re nourishing your body with nature&apos;s finest ingredients, supporting your gut microbiome, and investing in a healthier tomorrow.
-          </p>
+           FV Plus Agrotech combines agricultural expertise, scientific research, and intelligent technologies to revolutionize fruit quality assessment and post-harvest management.</p>
           <p style={{ fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: '1.5rem 0 2rem', fontWeight: 400 }}>
-            Experience the perfect balance of taste and wellness. Discover why thousands are choosing Guava Probi as their daily companion for a healthier, more vibrant life.
-          </p>
+          Through innovative solutions like Guava Probe, we help stakeholders make smarter decisions, minimize waste, improve product consistency, and create a more sustainable agricultural ecosystem.</p>
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(16,185,129,0.5)' }} whileTap={{ scale: 0.98 }}
             onClick={() => setIsContactOpen(true)}
@@ -353,6 +351,8 @@ function GuaviProbiContent() {
           >Connect With Us</motion.button>
         </motion.div>
       </div>
+
+      <Footer />
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>

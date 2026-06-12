@@ -75,7 +75,7 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
     {
       label: 'ABOUT',
       num: '01',
-      title: 'Biotech Innovation',
+      title: 'Innovation',
       slogan: 'Harvesting Innovation, Cultivating Prosperity',
       desc: 'Pioneering eco-friendly crop protection solutions. We engineer advanced agricultural biotechnology to increase yields while preserving the ecological balance and vitality of soil ecosystems.',
       bullets: [
@@ -85,15 +85,16 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
       ]
     },
     {
-      label: 'TEAM',
+      label: 'SERVICES',
       num: '02',
-      title: 'Precision Science',
-      slogan: 'Data Meets Organic Agriculture',
-      desc: 'Our cross-disciplinary team of agronomists, bio-scientists, and software engineers develops intelligent tracking ecosystems. We marry biological research with real-time field telemetry.',
+      title: 'SMART AGRITECH SERVICES',
+      slogan: 'INTELLIGENCE FOR EVERY HARVEST',
+      desc: 'Our services combine agricultural expertise, data analytics, and advanced sensing technologies to help growers, distributors, and food businesses make smarter decisions. From fruit quality assessment to post-harvest optimization, we deliver practical solutions that improve efficiency, reduce waste, and maximize value across the supply chain.',
       bullets: [
-        'Custom IoT Bio-Sensors',
-        'Machine Learning Soil Analytics',
-        'Predictive Yield Models'
+         'AI-Powered Fruit Quality Assessment',
+         'Non-Destructive Maturity Analysis',
+         'Post-Harvest Loss Reduction',
+         'Supply Chain Quality Intelligence'
       ]
     },
     {
@@ -103,9 +104,9 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
       slogan: 'Join the Green Revolution',
       desc: 'We collaborate with commercial farming companies, biotech researchers, and distribution networks globally. Reach out to integrate our agrotech solutions into your operations.',
       socials: [
-        { name: 'Email Support', val: 'contact@fvplusagrotech.com', link: 'mailto:contact@fvplusagrotech.com' },
-        { name: 'LinkedIn Company', val: 'FV Plus Agrotech', link: '#' },
-        { name: 'Twitter / X Feed', val: '@FVPlusAgrotech', link: '#' }
+        { name: 'Email Support', val: 'director@fvplus.in', link: 'mailto:director@fvplus.in' },
+        { name: 'LinkedIn Company', val: 'FV Plus Agrotech', link: 'https://www.linkedin.com/feed/update/urn:li:activity:7469262618789064704' },
+       
       ]
     }
   ];

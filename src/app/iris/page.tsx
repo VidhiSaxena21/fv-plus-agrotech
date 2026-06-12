@@ -13,6 +13,7 @@ import Navbar from '../../components/Navbar';
 import ContactModal from '../../components/ContactModal';
 import { CopyEditorProvider } from '../../components/CopyEditorContext';
 import ScrollReveal from '../../components/ScrollReveal';
+import Footer from '../../components/Footer';
 
 /* ─── SVG Icons ─────────────────────────────────────────────────────────────── */
 
@@ -220,14 +221,13 @@ function IrisContent() {
               </FadeIn>
               <FadeIn delay={0.2}>
                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-                  Forged from aerospace-grade aluminum and embedded with an array of biometric sensors. It non-destructively penetrates the dermal layer to read brix levels, firmness, and internal moisture with laboratory precision.
-                </p>
+                  Built for modern orchards, packhouses, and exporters, IRIS transforms fruit assessment into a precise, measurable science.Engineered with advanced sensing technology and intelligent analytics, it evaluates internal fruit quality within seconds, helping growers make confident decisions at every stage of the value chain.</p>
               </FadeIn>
               <FadeIn delay={0.4}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   {[
                     { icon: <ActivityIcon />, title: 'Spectroscopic Analysis', desc: 'Instant cellular breakdown.' },
-                    { icon: <ScanIcon />, title: 'Non-destructive Micro-Entry', desc: 'Preserves fruit integrity.' },
+                    { icon: <ScanIcon />, title: 'Non-destructive Assessment', desc: 'Preserves fruit integrity.' },
                   ].map((item) => (
                     <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
                       <div style={{ width: 52, height: 52, borderRadius: '50%', backgroundColor: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', flexShrink: 0, justifyContent: 'center', color: '#10b981' }}>
@@ -261,15 +261,14 @@ function IrisContent() {
 
           <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: 1200, margin: '0 auto', padding: '0 2rem' }}>
             <FadeIn>
-              <span style={{ color: '#fbbf24', textTransform: 'uppercase', fontWeight: 800, fontSize: '0.85rem', marginBottom: '1rem', display: 'block', letterSpacing: '0.25em' }}>The Science of Sweetness</span>
+              <span style={{ color: '#fbbf24', textTransform: 'uppercase', fontWeight: 800, fontSize: '0.85rem', marginBottom: '1rem', display: 'block', letterSpacing: '0.25em' }}>The Science of Precision</span>
               <h2 style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 7vw, 5rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-                99.9%<br /><span style={{ color: '#10b981' }}>Accuracy.</span>
+                95%<br /><span style={{ color: '#10b981' }}>Accuracy.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p style={{ fontSize: 'clamp(1rem, 1.3vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 550, lineHeight: 1.8 }}>
-                By analyzing the spectral signature of the mesocarp, Iris Probe calculates the exact ratio of fructose to structural fiber. It knows what a perfect guava tastes like before you ever bite into it.
-              </p>
+              By analyzing internal fruit characteristics including sweetness, firmness, moisture balance, and physiological maturity, IRIS delivers objective quality intelligence in real time.No destructive sampling.No uncertainty.Just precise measurements when they matter most.</p>
             </FadeIn>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '2rem', marginTop: '4rem', maxWidth: 800 }}>
@@ -301,9 +300,24 @@ function IrisContent() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
               {[
-                { icon: <ThermometerIcon />, title: 'Cultivation', body: 'Map orchard ripeness continuously. Direct harvesting teams to specific zones where fruit has hit peak metrics.', delay: 0.1 },
-                { icon: <DropletsIcon />, title: 'Processing', body: 'Automate quality control on the packing line. Reject sub-par fruit instantly based on internal, invisible metrics.', delay: 0.3 },
-                { icon: <ActivityIcon size={40} />, title: 'Distribution', body: 'Guarantee shelf-life to buyers. Export granular batch data that proves the exact physiological state of your yield.', delay: 0.5 },
+                {
+  icon: <ThermometerIcon />,
+  title: 'Orchard Intelligence',
+  body: 'Monitor maturity trends, identify harvest-ready zones, and optimize harvesting schedules using real-time fruit quality insights.',
+  delay: 0.1,
+},
+{
+  icon: <DropletsIcon />,
+  title: 'Packhouse Optimization',
+  body: 'Improve grading consistency and automate quality verification with objective measurements of internal fruit characteristics.',
+  delay: 0.3,
+},
+{
+  icon: <ActivityIcon size={40} />,
+  title: 'Distribution Assurance',
+  body: 'Enhance shelf-life management and provide transparent quality validation for buyers, exporters, and retailers.',
+  delay: 0.5,
+},
               ].map((card) => (
                 <FadeIn key={card.title} delay={card.delay}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
@@ -322,11 +336,7 @@ function IrisContent() {
 
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
-        <footer style={{ padding: '3rem 2rem', textAlign: 'center', borderTop: '1px solid rgba(16,185,129,0.1)', position: 'relative', zIndex: 20 }}>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', margin: 0, letterSpacing: '0.05em' }}>
-            &copy; {new Date().getFullYear()} Iris Probe Technologies. Precision instruments for agriculture.
-          </p>
-        </footer>
+        <Footer />
       </div>
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />

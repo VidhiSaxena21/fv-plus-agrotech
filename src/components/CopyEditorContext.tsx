@@ -75,9 +75,9 @@ const defaultCopy: WebsiteCopy = {
     description: 'Our unwavering dedication lies in catalyzing the agri-economy through strategic value addition. We are committed to empowering diverse stakeholders, from farmers and traders to retailers, importers, and exporters. Our mission revolves around pioneering innovative solutions and sustainable practices, aimed at revolutionizing fresh produce management and fostering an environment for all individuals within the agricultural spectrum to thrive and prosper.',
   },
   guavaProbi: {
-    title: 'Guava Probi Technology',
-    subtitle: 'Guava Probiotic Drink',
-    description: 'Promotes gut-healthy microbiome and supports overall well-being. With all the natural benefits of whole guava, it promotes gut-healthy microbiomes, optimizes digestion and physiological balance, and contributes to improved overall health and well-being.',
+    title: 'Guava Probi',
+    subtitle: 'Fruit Quality Assessment Solution',
+    description: 'Guava Probi is an advanced fruit quality assessment solution designed to deliver fast, accurate, and data-driven insights into guava maturity, freshness, and overall quality. By enabling informed harvesting decisions, reducing post-harvest losses, and ensuring consistent fruit standards, it empowers growers, distributors, and retailers to improve efficiency, profitability, and sustainability across the supply chain.',
     whyChooseTitle: 'Why Choose Guava Probi?',
     slogan: 'Highly nutritious and an immunity booster. No added sugar. Natural and preservative free.',
     feature1Title: 'Immunity Booster',
@@ -88,9 +88,9 @@ const defaultCopy: WebsiteCopy = {
     feature3Desc: '100% natural whole-fruit nutrition with no added sugar or artificial preservatives.',
   },
   iris: {
-    title: 'IRIS IoT Solutions',
-    subtitle: 'Smart Monitoring Systems',
-    description: 'IRIS is a cutting-edge IoT device offering solutions that revamp fruit management from farm to table. This holistic system is designed to cater to each phase of the fruit supply chain, ensuring optimal fruit quality from producer to customer.',
+    title: 'IRIS',
+    subtitle: 'Connected Sensors. Intelligent Insights. Better Harvests.',
+    description: 'Our advanced IoT sensors provide real-time monitoring of fruit quality and storage conditions, delivering accurate data for smarter agricultural decisions. Integrated with AI-powered analytics, they help detect changes early, optimize storage, reduce post-harvest losses, and maintain consistent quality. By transforming raw data into actionable insights, they improve efficiency, profitability, and sustainability across the fruit supply chain.',
   },
   postHarvest: {
     title: 'Post-Harvest Management',

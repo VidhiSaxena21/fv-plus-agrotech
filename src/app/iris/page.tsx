@@ -143,7 +143,7 @@ function IrisContent() {
                   lineHeight: 0.95,
                 }}
               >
-                IRIS <span style={{ color: '#10b981' }}>PROBE</span>
+                IRIS <span style={{ color: '#10b981' }}></span>
               </h1>
             </motion.div>
 

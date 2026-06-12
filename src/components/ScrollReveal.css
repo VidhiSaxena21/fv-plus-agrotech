@@ -1,0 +1,56 @@
+.scroll-reveal {
+  margin: 20px 0;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.word {
+  display: inline-block;
+}
+
+/* ── Iris page variants ─────────────────────────────────────────────────── */
+
+/* Big uppercase headline (Section 2 title) */
+.iris-headline-reveal {
+  margin: 0 0 2.5rem;
+}
+
+.iris-headline-text {
+  font-family: 'Arial Black', 'Arial Bold', Arial, Impact, sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* Body-copy paragraph */
+.iris-body-reveal {
+  margin: 0;
+}
+
+.iris-body-text {
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* CTA headline */
+.iris-cta-reveal {
+  margin: 0 0 1.5rem;
+}
+
+.iris-cta-text {
+  font-family: 'Arial Black', 'Arial Bold', Arial, Impact, sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.12;
+  text-transform: uppercase;
+  color: #ffffff;
+}

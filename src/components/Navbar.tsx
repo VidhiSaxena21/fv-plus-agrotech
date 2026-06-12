@@ -59,13 +59,12 @@ export default function Navbar({ onConnectClick }: { onConnectClick?: () => void
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-baseline select-none group">
-          <span className="text-yellow-400 font-extrabold text-xl md:text-2xl tracking-wide transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]">
-            FV Plus
-          </span>
-          <span className="text-white/80 font-light italic text-xs md:text-sm ml-1.5 tracking-wider">
-            Agrotech
-          </span>
+        <Link href="/" className="flex items-center select-none group">
+          <img
+            src="/logo.png"
+            alt="FV Plus Agrotech Logo"
+            className="h-10 md:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+          />
         </Link>
 
         {/* Desktop nav */}

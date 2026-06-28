@@ -19,46 +19,26 @@ export default function Footer() {
     </div>
 
     {/* Contact Info */}
-    <div className="grid md:grid-cols-2 gap-8">
+    <div>
+      <h3 className="text-white font-bold text-lg uppercase mb-3">
+        Contact
+      </h3>
 
-      {/* Address */}
-      <div>
-        <h3 className="text-white font-bold text-lg uppercase mb-3">
-          Address
-        </h3>
+      <div className="space-y-3 text-white/60">
+        <a
+          href="mailto:directoryfvplus@gmail.com"
+          className="block hover:text-[#10b981] transition-colors"
+        >
+          directoryfvplus@gmail.com
+        </a>
 
-        <p className="text-white/60 leading-7">
-          TIET-TAU Center Of Excellence For Food Security (T2CEFS)
-          <br />
-          Thapar Institute Of Engineering and Technology
-          <br />
-          Patiala, Punjab 147004
-        </p>
+        <a
+          href="tel:+919878249089"
+          className="block hover:text-[#10b981] transition-colors"
+        >
+          +91 98782 49089
+        </a>
       </div>
-
-      {/* Contact */}
-      <div>
-        <h3 className="text-white font-bold text-lg uppercase mb-3">
-          Contact
-        </h3>
-
-        <div className="space-y-3 text-white/60">
-          <a
-            href="mailto:directoryfvplus@gmail.com"
-            className="block hover:text-[#10b981] transition-colors"
-          >
-            directoryfvplus@gmail.com
-          </a>
-
-          <a
-            href="tel:+919878249089"
-            className="block hover:text-[#10b981] transition-colors"
-          >
-            +91 98782 49089
-          </a>
-        </div>
-      </div>
-
     </div>
 
     {/* Bottom */}

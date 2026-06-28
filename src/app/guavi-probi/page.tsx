@@ -194,7 +194,7 @@ function GuaviProbiContent() {
               One Fruit. One Fermentation. Infinite Possibilities.
             </p>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', lineHeight: 1.8, margin: isMobile || isTablet ? '0 auto 1.5rem' : '0 0 1.5rem 0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-              Guava Probi is India's first probiotic guava drink — crafted from 100% whole guava fruit with live probiotic cultures and zero added sugar. No artificial flavours. No preservatives.   </p>
+              Guava Probi is India&apos;s first probiotic guava drink — crafted from 100% whole guava fruit with live probiotic cultures and zero added sugar. No artificial flavours. No preservatives.   </p>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.85rem, 1vw, 0.95rem)', lineHeight: 1.75, margin: isMobile || isTablet ? '0 auto' : '0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
               Just the natural taste and gut-friendly power of fresh guava, straight from the orchard to your hands.
             </p>
@@ -341,7 +341,7 @@ function GuaviProbiContent() {
             FROM PERISHABLE FRUIT TO POWERFUL NUTRITION
           </h2>
           <p style={{ fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: '1.5rem 0', fontWeight: 400 }}>
-            FV Plus Agrotech combines ancient fermentation wisdom, scientific research, and precision biotechnology to transform India's most wasted fruits into functional nutrition. </p>
+            FV Plus Agrotech combines ancient fermentation wisdom, scientific research, and precision biotechnology to transform India&apos;s most wasted fruits into functional nutrition. </p>
           <p style={{ fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: '1.5rem 0 2rem', fontWeight: 400 }}>
             Through ANVAYA™ — our patented postbiotic ingredient platform — we help farmers recover value from surplus fruit, empower women-led communities, and give food manufacturers clean-label bioactive ingredients that improve gut health, immunity, and metabolic wellness.</p>
           <motion.button

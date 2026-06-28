@@ -80,7 +80,7 @@ function IrisVisual() {
 
 export default function HorizontalProductSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { copy } = useCopy();
+  useCopy();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

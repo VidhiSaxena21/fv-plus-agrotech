@@ -179,7 +179,7 @@ function IrisContent() {
               transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
               style={{ fontSize: 'clamp(1rem, 1.5vw, 1.4rem)', color: 'rgba(255,255,255,0.75)', fontWeight: 300, letterSpacing: '0.05em', maxWidth: 700, margin: '0 auto', lineHeight: 1.6 }}
             >
-              Freshness Shouldn't Be a Guessing Game.<br></br>
+              Freshness Shouldn&apos;t Be a Guessing Game.<br></br>
               A portable, non-invasive fruit monitoring system powered by IoT, embedded ML, and smart sensors — built for transit and storage.
             </motion.p>
           </div>
@@ -319,7 +319,7 @@ function IrisContent() {
                   </div>
                   <FadeIn delay={0.6}>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', maxWidth: 800, margin: '0 auto', lineHeight: 1.6 }}>
-                      India's F&V market is growing at ~8% CAGR. Cold chain infrastructure is set to double by 2030 under PM Gati Shakti. Sensor-based quality control is a ₹3,800+ Crore greenfield opportunity with virtually no organized competition today.
+                      India&apos;s F&amp;V market is growing at ~8% CAGR. Cold chain infrastructure is set to double by 2030 under PM Gati Shakti. Sensor-based quality control is a ₹3,800+ Crore greenfield opportunity with virtually no organized competition today.
                     </p>
                   </FadeIn>
                 </div>
@@ -797,7 +797,7 @@ function IrisContent() {
                     <FadeIn delay={0.3}>
                       <div className="partner-group">
                         <h3 className="partner-group-title" style={{ color: '#ffffff', fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem' }}>Organized Retail, Quick-Commerce & Wholesale:</h3>
-                        <p className="partner-group-desc" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.6 }}>Reliance Retail (Fresh / Smart Bazaar) · DMart / Big Bazaar / Spencer's · BigBasket, Blinkit, Zepto, Swiggy Instamart · Nature's Basket / Star Bazaar · APMC / Mandi wholesale markets (Azadpur, Vashi)</p>
+                        <p className="partner-group-desc" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.6 }}>Reliance Retail (Fresh / Smart Bazaar) · DMart / Big Bazaar / Spencer&apos;s · BigBasket, Blinkit, Zepto, Swiggy Instamart · Nature&apos;s Basket / Star Bazaar · APMC / Mandi wholesale markets (Azadpur, Vashi)</p>
                       </div>
                     </FadeIn>
                     <FadeIn delay={0.4}>

@@ -26,16 +26,16 @@ function GuavaVisual() {
             <span className="text-2xl">🧬</span>
           </div>
           <div className="grid grid-cols-2 gap-2.5">
-            {[['96%','Efficacy'],['24mo','Shelf Life'],['100%','Coverage'],['GRAS','Safety']].map(([v,l]) => (
+            {[['50%', 'Food Loss Reduced'], ['$50B', 'Global Market'], ['100%', 'Natural Process'], ['JUICES · BAKERY', 'Formats']].map(([v, l]) => (
               <div key={l} className="rounded-xl p-3 text-center" style={{ border: '1px solid rgba(16,185,129,0.15)', background: 'rgba(0,0,0,0.3)' }}>
-                <p className="font-black text-lg" style={{ color: '#10b981' }}>{v}</p>
-                <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.35)' }}>{l}</p>
+                <p className="font-black text-base leading-tight" style={{ color: '#10b981' }}>{v}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider mt-1" style={{ color: 'rgba(255,255,255,0.35)' }}>{l}</p>
               </div>
             ))}
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#10b981' }} />
-            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: 'rgba(16,185,129,0.7)' }}>Probiotic Active</span>
+            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: 'rgba(16,185,129,0.7)' }}>Postbiotic Active</span>
           </div>
         </div>
       </div>
@@ -60,20 +60,17 @@ function IrisVisual() {
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)' }}>
             <span className="text-2xl">📡</span>
           </div>
-          <div className="space-y-2">
-            {[['TEMPERATURE','72°',72],['HUMIDITY','55%',55],['CO₂ LEVEL','380',38],['SOIL pH','6.8',89]].map(([label, val, pct]) => (
-              <div key={label as string} className="flex items-center gap-3">
-                <span className="text-[9px] font-bold tracking-wider w-20 shrink-0" style={{ color: 'rgba(255,255,255,0.35)' }}>{label}</span>
-                <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                  <div className="h-full rounded-full" style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #f59e0b, #fbbf24)' }} />
-                </div>
-                <span className="text-[10px] font-bold" style={{ color: '#f59e0b' }}>{val}</span>
+          <div className="grid grid-cols-2 gap-2.5">
+            {[['4–5 Cr', 'Food Lost Annually'], ['₹1.5L Cr', 'Economic Loss'], ['40%', 'Avoidable w/ Better Mgmt'], ['₹3,800 Cr', 'Market Opportunity']].map(([v, l]) => (
+              <div key={l} className="rounded-xl p-3 text-center" style={{ border: '1px solid rgba(245,158,11,0.15)', background: 'rgba(0,0,0,0.3)' }}>
+                <p className="font-black text-base leading-tight" style={{ color: '#f59e0b' }}>{v}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider mt-1" style={{ color: 'rgba(255,255,255,0.35)' }}>{l}</p>
               </div>
             ))}
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f59e0b' }} />
-            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: 'rgba(245,158,11,0.7)' }}>Live Telemetry</span>
+            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: 'rgba(245,158,11,0.7)' }}>Live Fruit Monitoring</span>
           </div>
         </div>
       </div>
@@ -97,10 +94,10 @@ export default function HorizontalProductSection() {
   const panels = [
     {
       tag: 'Biotech Product',
-      title: copy.guavaProbi?.title ?? 'GUAVA PROBI',
-      subtitle: copy.guavaProbi?.subtitle ?? 'Fruit Quality Assessment Solution',
-      desc: copy.guavaProbi?.description ?? 'Guava Probi is an advanced fruit quality assessment solution designed to deliver fast, accurate, and data-driven insights into guava maturity, freshness, and overall quality.',
-      features: ['🛡️ Quality Assessment', '📊 Data-driven Insights', '🌱 100% Natural', '🔋 Immunity Booster'],
+      title: 'ANVAYA',
+      subtitle: 'POSTBIOTIC GUAVA INGREDIENT',
+      desc: 'ANVAYA™ transforms fragile, surplus guava into resilient functional nutrition through advanced lacto-fermentation technology. Controlled fermentation converts fruit sugars into bioactive metabolites — generating postbiotics, antioxidants, and organic acids that support gut health. Dehydrated powder form eliminates cold chain requirements. No synthetic additives. No preservatives. One ingredient. Beverages, bakery, dairy, pharma, and wellness.',
+      features: ['🧬 Postbiotic Power', '📦 Shelf-Stable', '🚫 Zero Preservatives', '🏭 B2B Ingredient'],
       accentColor: '#10b981',
       borderColor: 'rgba(16,185,129,0.2)',
       tagStyle: { background: 'rgba(16,185,129,0.08)', color: '#34d399', border: '1px solid rgba(16,185,129,0.2)' },
@@ -109,10 +106,10 @@ export default function HorizontalProductSection() {
     },
     {
       tag: 'IoT Platform',
-      title: copy.iris?.title ?? 'IRIS',
-      subtitle: copy.iris?.subtitle ?? 'Connected Sensors. Intelligent Insights. Better Harvests.',
-      desc: copy.iris?.description ?? 'Our advanced IoT sensors provide real-time monitoring of fruit quality and storage conditions, delivering accurate data for smarter agricultural decisions.',
-      features: ['📡 IoT Sensors', '📊 Real-time Data', '🧠 Intelligent Insights', '🌾 Better Harvests'],
+      title: 'IRIS',
+      subtitle: 'VOC DETECTION. REAL-TIME MONITORING. ZERO POST-HARVEST LOSSES.',
+      desc: 'IRIS is a portable, non-invasive fruit monitoring system that detects ripeness using VOC release — no touching, no damage. Powered by IoT, embedded ML, and smart sensors, it delivers real-time health data for fruits simultaneously, built for transit and storage. It continuously tracks VOC levels to predict spoilage, optimize dispatch, and reduce post-harvest losses in real time.',
+      features: ['📡 VOC Detection', '🔬 Non-Invasive', '🧠 Embedded ML', '📶 IoT Monitoring'],
       accentColor: '#f59e0b',
       borderColor: 'rgba(245,158,11,0.2)',
       tagStyle: { background: 'rgba(245,158,11,0.08)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.2)' },
@@ -133,28 +130,29 @@ export default function HorizontalProductSection() {
           {panels.map((p, i) => (
             <div
               key={i}
-              className="relative w-screen h-full shrink-0 flex items-center justify-center px-6 md:px-16 lg:px-24"
+              className="relative w-screen h-full shrink-0 flex items-center justify-center px-5 sm:px-10 md:px-16 lg:px-24"
+              style={{ overflowY: 'hidden' }}
             >
-              <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
                 {/* Text */}
-                <div className="space-y-5 order-1 lg:order-1">
-                  <span className="inline-block px-3 py-1.5 text-xs tracking-[0.25em] font-bold uppercase rounded-full" style={p.tagStyle}>
+                <div className="space-y-3 sm:space-y-4 lg:space-y-5 order-1">
+                  <span className="inline-block px-3 py-1 text-[10px] sm:text-xs tracking-[0.25em] font-bold uppercase rounded-full" style={p.tagStyle}>
                     {p.tag}
                   </span>
                   <h2
                     className="font-black uppercase text-white leading-none tracking-tight"
-                    style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)' }}
+                    style={{ fontSize: 'clamp(2rem, 8vw, 5rem)' }}
                   >
                     {p.title}
                   </h2>
-                  <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: p.accentColor }}>
+                  <p className="text-[9px] sm:text-xs font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-snug" style={{ color: p.accentColor }}>
                     {p.subtitle}
                   </p>
-                  <div className="h-[2px] w-14 rounded-full" style={{ background: p.accentColor }} />
-                  <p className="text-gray-300 text-[15px] leading-relaxed font-light max-w-md">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2 pt-1">
+                  <div className="h-[2px] w-10 rounded-full" style={{ background: p.accentColor }} />
+                  <p className="text-gray-300 text-[13px] sm:text-[15px] leading-relaxed font-light max-w-md line-clamp-4 sm:line-clamp-none">{p.desc}</p>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-0.5">
                     {p.features.map((f) => (
-                      <span key={f} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold text-white/80"
+                      <span key={f} className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold text-white/80"
                         style={{ border: `1px solid ${p.borderColor}`, background: 'rgba(0,0,0,0.3)' }}>
                         {f}
                       </span>
@@ -162,15 +160,15 @@ export default function HorizontalProductSection() {
                   </div>
                   <Link
                     href={p.href}
-                    className="mt-1 inline-block px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:opacity-80 text-center"
+                    className="mt-1 inline-block px-5 py-2 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:opacity-80 text-center"
                     style={{ border: `1px solid ${p.borderColor}`, color: p.accentColor }}
                   >
                     Learn More →
                   </Link>
                 </div>
 
-                {/* Visual */}
-                <div className="order-2 lg:order-2 flex justify-center">{p.visual}</div>
+                {/* Visual — hidden on mobile, shown on lg+ */}
+                <div className="hidden lg:flex order-2 justify-center">{p.visual}</div>
               </div>
             </div>
           ))}

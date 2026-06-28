@@ -66,6 +66,15 @@ const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 /* ─── Page body ─────────────────────────────────────────────────────────────── */
 function IrisContent() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const { scrollYProgress } = useScroll();
 
   /* Mouse parallax for hero */
@@ -92,6 +101,22 @@ function IrisContent() {
   const probeScale = useTransform(scrollYProgress, [0.15, 0.45], [0.85, 1]);
   const probeRotate = useTransform(scrollYProgress, [0.15, 0.45], [-8, 0]);
 
+  /* Horizontal scroll for Wastage & Market sections */
+  const horizontalScrollRef = useRef(null);
+  const { scrollYProgress: horizontalProgress } = useScroll({
+    target: horizontalScrollRef,
+    offset: ['start start', 'end end'],
+  });
+  const horizontalX = useTransform(horizontalProgress, [0, 1], ['0%', '-50%']);
+
+  /* Horizontal scroll for Tech & Partners sections */
+  const horizontalScrollRef2 = useRef(null);
+  const { scrollYProgress: horizontalProgress2 } = useScroll({
+    target: horizontalScrollRef2,
+    offset: ['start start', 'end end'],
+  });
+  const horizontalX2 = useTransform(horizontalProgress2, [0, 1], ['0%', '-50%']);
+
   /* ─── Shared section bg: transparent so the site's fixed image.png shows ── */
   const sectionBase: React.CSSProperties = {
     position: 'relative',
@@ -104,7 +129,7 @@ function IrisContent() {
         • No solid background (transparent) so globals.css body bg-image shows through
         • A light dark overlay identical to ClientScrollyWrapper
     */
-    <div style={{ minHeight: '100vh', overflowX: 'hidden', backgroundColor: 'transparent' }}>
+    <div style={{ minHeight: '100vh', overflowX: 'clip', backgroundColor: 'transparent' }}>
       {/* Same fixed overlay used on all pages */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-black/40 backdrop-blur-[2px]" />
 
@@ -154,7 +179,8 @@ function IrisContent() {
               transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
               style={{ fontSize: 'clamp(1rem, 1.5vw, 1.4rem)', color: 'rgba(255,255,255,0.75)', fontWeight: 300, letterSpacing: '0.05em', maxWidth: 700, margin: '0 auto', lineHeight: 1.6 }}
             >
-              Absolute certainty, beneath the skin. The precision instrument for tropical agriculture.
+              Freshness Shouldn't Be a Guessing Game.<br></br>
+              A portable, non-invasive fruit monitoring system powered by IoT, embedded ML, and smart sensors — built for transit and storage.
             </motion.p>
           </div>
 
@@ -185,7 +211,7 @@ function IrisContent() {
               textClassName="iris-headline-text"
               wordAnimationEnd="bottom center"
             >
-              The subjective era of fruit grading is over.
+              EVERY YEAR, ₹1.5 LAKH CRORE IS LOST. SILENTLY.
             </ScrollReveal>
 
             {/* ── Body paragraph with word-reveal ── */}
@@ -198,10 +224,110 @@ function IrisContent() {
               textClassName="iris-body-text"
               wordAnimationEnd="bottom center"
             >
-              For generations, determining the perfect moment of harvest meant relying on intuition. A squeeze. A tap. A guess. Millions lost to overripeness, inconsistency, and transport decay. We engineered a solution that turns guesswork into absolute data.
+              India produces ~16 crore tonnes of fruits and vegetables annually — the 2nd largest globally. Yet 4–5 crore tonnes are lost post-harvest every single year, ~30–35% of total production, before anyone notices. Not in the field. In transit. In storage. In the dark.<br></br>
+              IRIS was built to turn that darkness into data.
             </ScrollReveal>
           </div>
         </section>
+
+        {/* ── HORIZONTAL SCROLL CONTAINER for Wastage and Market Size ──────── */}
+        <div ref={horizontalScrollRef} className="horizontal-scroll-container">
+          <div className="horizontal-sticky-wrapper">
+            <motion.div
+              className="horizontal-motion-div"
+              style={{
+                x: isMobile ? 0 : horizontalX,
+              }}
+            >
+
+              {/* ── NEW: The Wastage Numbers ─────────────────────────────────────── */}
+              <section className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
+                </div>
+                <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', position: 'relative', zIndex: 10 }}>
+                  <FadeIn>
+                    <h2 className="section-title">
+                      THE WASTAGE NUMBERS —<br /><span style={{ color: '#10b981' }}>AND THE PRIZE FOR SOLVING THEM.</span>
+                    </h2>
+                  </FadeIn>
+                  <div className="stat-card-grid">
+                    {[
+                      { val: '~16 Cr Tonnes', desc: 'Fruits & vegetables produced in India annually — 2nd largest producer globally.' },
+                      { val: '4–5 Cr Tonnes', desc: 'Lost post-harvest every year. That is 30–35% of total production gone before it reaches a consumer.' },
+                      { val: '₹1.5 Lakh Crore', desc: 'Economic loss annually (~$18 Billion USD). 40% of this is avoidable with better monitoring and management.' },
+                      { val: '₹60,000 Crore', desc: 'Recoverable value — the immediate financial opportunity that better post-harvest technology can unlock.' },
+                    ].map((stat, i) => (
+                      <FadeIn key={i} delay={0.1 * i}>
+                        <div style={{ borderLeft: '3px solid #10b981', paddingLeft: '1.25rem', height: '100%' }}>
+                          <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>{stat.val}</div>
+                          <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{stat.desc}</div>
+                        </div>
+                      </FadeIn>
+                    ))}
+                  </div>
+                  <FadeIn delay={0.5}>
+                    <div className="crop-table-box" style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderRadius: '24px', padding: '2rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <h3 style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Wastage by Crop</h3>
+                      <div className="crop-table-grid">
+                        {[
+                          { crop: 'Mango', loss: '30%', value: '₹14,500 Cr/yr' },
+                          { crop: 'Banana', loss: '28%', value: '₹12,800 Cr/yr' },
+                          { crop: 'Guava', loss: '35%', value: '₹10,200 Cr/yr' },
+                          { crop: 'Papaya', loss: '40%', value: '₹6,400 Cr/yr' },
+                        ].map((c, i) => (
+                          <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                            <span style={{ color: '#fbbf24', fontWeight: 700, fontSize: '1.1rem' }}>{c.crop}</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
+                              <span>Loss: <span style={{ color: '#fff' }}>{c.loss}</span></span>
+                              <span>{c.value}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </FadeIn>
+                </div>
+              </section>
+
+              {/* ── NEW: Market Size ─────────────────────────────────────────────── */}
+              <section className="horizontal-section" style={{ display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
+                </div>
+                <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+                  <FadeIn>
+                    <h2 className="market-section-title">
+                      A ₹3,800 CRORE<br /><span style={{ color: '#10b981' }}>GREENFIELD OPPORTUNITY.</span>
+                    </h2>
+                  </FadeIn>
+                  <div className="circle-cards-container">
+                    {[
+                      { title: 'TAM — ₹2,10,000 Cr', desc: "Total Addressable Market: India's full fruits and vegetables market from farm-gate to consumer." },
+                      { title: 'SAM — ₹38,000 Cr', desc: 'Serviceable Addressable Market: Modern trade, cold chain, and export segment.' },
+                      { title: 'SOM — ₹3,800 Cr', desc: 'Serviceable Obtainable Market: Early adopters across 5 key states in Years 1–3.' },
+                    ].map((circle, i) => (
+                      <FadeIn key={i} delay={0.2 * i}>
+                        <div className="circle-card-item">
+                          <div className="circle-card-title" style={{ color: '#10b981', fontWeight: 800, fontSize: '1.2rem', textAlign: 'center' }}>{circle.title}</div>
+                          <div className="circle-card-desc" style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', textAlign: 'center', lineHeight: 1.5 }}>{circle.desc}</div>
+                        </div>
+                      </FadeIn>
+                    ))}
+                  </div>
+                  <FadeIn delay={0.6}>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', maxWidth: 800, margin: '0 auto', lineHeight: 1.6 }}>
+                      India's F&V market is growing at ~8% CAGR. Cold chain infrastructure is set to double by 2030 under PM Gati Shakti. Sensor-based quality control is a ₹3,800+ Crore greenfield opportunity with virtually no organized competition today.
+                    </p>
+                  </FadeIn>
+                </div>
+              </section>
+
+            </motion.div>
+          </div>
+        </div>
 
         {/* ── 3. Probe Reveal ──────────────────────────────────────────────── */}
         <section style={{ ...sectionBase, minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem', overflow: 'hidden' }}>
@@ -221,13 +347,15 @@ function IrisContent() {
               </FadeIn>
               <FadeIn delay={0.2}>
                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-                  Built for modern orchards, packhouses, and exporters, IRIS transforms fruit assessment into a precise, measurable science.Engineered with advanced sensing technology and intelligent analytics, it evaluates internal fruit quality within seconds, helping growers make confident decisions at every stage of the value chain.</p>
+                  IRIS is a portable, non-invasive fruit monitoring system that detects ripeness using Volatile Organic Compound (VOC) release — no touching, no damage, no guesswork. Powered by IoT connectivity, embedded machine learning, and smart sensors, it delivers real-time freshness data for multiple fruits simultaneously, built specifically for transit and storage environments. </p>
               </FadeIn>
               <FadeIn delay={0.4}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   {[
-                    { icon: <ActivityIcon />, title: 'Spectroscopic Analysis', desc: 'Instant cellular breakdown.' },
-                    { icon: <ScanIcon />, title: 'Non-destructive Assessment', desc: 'Preserves fruit integrity.' },
+                    { icon: <ActivityIcon />, title: 'VOC Detection', desc: 'Continuously reads volatile organic compounds released by fruit as they ripen, detecting changes invisible to the human eye or hand.' },
+                    { icon: <ScanIcon />, title: 'Non-Invasive Monitoring', desc: 'No touching, no sampling, no damage. Fruit integrity is completely preserved throughout the monitoring process.' },
+                    { icon: <ActivityIcon />, title: 'Embedded ML Intelligence', desc: 'Interprets color-change and VOC-pattern data to predict ripeness stage with accuracy, not estimation.' },
+                    { icon: <ScanIcon />, title: 'Real-Time IoT Connectivity', desc: 'Live data logging and remote monitoring via Wi-Fi and Bluetooth. Track multiple batches from one dashboard, anywhere.' },
                   ].map((item) => (
                     <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
                       <div style={{ width: 52, height: 52, borderRadius: '50%', backgroundColor: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', flexShrink: 0, justifyContent: 'center', color: '#10b981' }}>
@@ -253,7 +381,7 @@ function IrisContent() {
         </section>
 
         {/* ── 4. Precision Stats ────────────────────────────────────────────── */}
-        <section style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+        <section className="precision-stats-section" style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0 }}>
             <img src="/iris/guava-cross-section.png" alt="Guava Cross Section" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4,9,4,0.97) 0%, rgba(4,9,4,0.82) 50%, rgba(4,9,4,0.4) 100%)' }} />
@@ -261,27 +389,28 @@ function IrisContent() {
 
           <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: 1200, margin: '0 auto', padding: '0 2rem' }}>
             <FadeIn>
-              <span style={{ color: '#fbbf24', textTransform: 'uppercase', fontWeight: 800, fontSize: '0.85rem', marginBottom: '1rem', display: 'block', letterSpacing: '0.25em' }}>The Science of Precision</span>
-              <h2 style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 7vw, 5rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-                95%<br /><span style={{ color: '#10b981' }}>Accuracy.</span>
+              <h2 className="precision-stats-title" style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '1.5rem', lineHeight: 1.1 }}>
+                YOUR STOREHOUSE <br /><span style={{ color: '#10b981' }}>JUST GOT A BRAIN.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p style={{ fontSize: 'clamp(1rem, 1.3vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 550, lineHeight: 1.8 }}>
-              By analyzing internal fruit characteristics including sweetness, firmness, moisture balance, and physiological maturity, IRIS delivers objective quality intelligence in real time.No destructive sampling.No uncertainty.Just precise measurements when they matter most.</p>
+              <p className="precision-stats-desc" style={{ fontSize: 'clamp(1rem, 1.3vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 650, lineHeight: 1.8 }}>
+                IRIS continuously tracks VOC levels to predict spoilage, optimize dispatch, and reduce post-harvest losses in real time — replacing manual inspection and guesswork with accurate, AI-powered insights.</p>
             </FadeIn>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '2rem', marginTop: '4rem', maxWidth: 800 }}>
+            <div className="precision-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem', marginTop: '4rem', maxWidth: 1000 }}>
               {[
-                { val: '0.2s', label: 'Read Time', delay: 0.4 },
-                { val: '±0.1%', label: 'Brix Variance', delay: 0.5 },
-                { val: 'IP68', label: 'Weatherproof', delay: 0.6 },
-                { val: '10k', label: 'Scans / Charge', delay: 0.7 },
-              ].map((stat) => (
-                <FadeIn key={stat.label} delay={stat.delay}>
-                  <div style={{ borderLeft: '3px solid #10b981', paddingLeft: '1.25rem' }}>
-                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{stat.val}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.25rem' }}>{stat.label}</div>
+                { title: 'Predict Spoilage Early', desc: 'Detect rising VOC levels before visible decay appears, preventing losses before they spread.', delay: 0.3 },
+                { title: 'Optimize Dispatch', desc: 'Identify which batches are ready to ship and which require more time for peak freshness.', delay: 0.4 },
+                { title: 'Reduce Post-Harvest Losses', desc: 'Continuously monitor fruit quality without handling or damaging a single fruit.', delay: 0.5 },
+                { title: 'Real-Time Visibility', desc: 'Track storage conditions and freshness trends across multiple batches from one dashboard.', delay: 0.6 },
+                { title: 'Data-Driven Decisions', desc: 'Replace manual inspection and guesswork with accurate, AI-powered insights.', delay: 0.7 },
+                { title: 'Maximize Profitability', desc: 'Improve quality consistency, reduce waste, and increase returns across the supply chain.', delay: 0.8 },
+              ].map((cap) => (
+                <FadeIn key={cap.title} delay={cap.delay}>
+                  <div className="precision-stat-card" style={{ borderLeft: '3px solid #10b981', paddingLeft: '1.25rem', height: '100%' }}>
+                    <div className="precision-stat-card-title" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>{cap.title}</div>
+                    <div className="precision-stat-card-desc" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{cap.desc}</div>
                   </div>
                 </FadeIn>
               ))}
@@ -301,23 +430,41 @@ function IrisContent() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
               {[
                 {
-  icon: <ThermometerIcon />,
-  title: 'Orchard Intelligence',
-  body: 'Monitor maturity trends, identify harvest-ready zones, and optimize harvesting schedules using real-time fruit quality insights.',
-  delay: 0.1,
-},
-{
-  icon: <DropletsIcon />,
-  title: 'Packhouse Optimization',
-  body: 'Improve grading consistency and automate quality verification with objective measurements of internal fruit characteristics.',
-  delay: 0.3,
-},
-{
-  icon: <ActivityIcon size={40} />,
-  title: 'Distribution Assurance',
-  body: 'Enhance shelf-life management and provide transparent quality validation for buyers, exporters, and retailers.',
-  delay: 0.5,
-},
+                  icon: <ThermometerIcon />,
+                  title: 'Cold Storage & Warehousing',
+                  body: 'Optimize storage duration and reduce spoilage of bulk-stored fruits and vegetables. Detect rising VOC levels before visible decay appears — preventing losses before they spread across the batch.',
+                  delay: 0.1,
+                },
+                {
+                  icon: <DropletsIcon />,
+                  title: 'Cold Chain Logistics & 3PLs',
+                  body: 'In-transit VOC monitoring for refrigerated trucks, reefers, and containers to prevent premature ripening and catch spoilage before it reaches the destination.',
+                  delay: 0.2,
+                },
+                {
+                  icon: <ActivityIcon size={40} />,
+                  title: 'Organized Retail & Supermarkets',
+                  body: 'Shelf-life prediction and dynamic markdown and restocking decisions at distribution centers and stores. Know exactly which produce needs to move first.',
+                  delay: 0.3,
+                },
+                {
+                  icon: <ScanIcon />,
+                  title: 'Quick-Commerce & Online Grocery',
+                  body: 'Inventory freshness scoring for dark stores to minimize last-mile delivery of overripe produce and reduce customer complaints and returns.',
+                  delay: 0.4,
+                },
+                {
+                  icon: <ActivityIcon size={40} />,
+                  title: 'Food Processing & Packaging',
+                  body: 'Quality-grading inputs for juice, puree, and ready-to-eat processing units. Ensure only the right-ripeness fruit enters your production line.',
+                  delay: 0.5,
+                },
+                {
+                  icon: <ThermometerIcon />,
+                  title: 'FPOs, Exporters & Large Growers',
+                  body: 'Post-harvest ripening control for export consignments and farm-gate aggregation centers. Meet international quality standards, batch after batch.',
+                  delay: 0.6,
+                },
               ].map((card) => (
                 <FadeIn key={card.title} delay={card.delay}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
@@ -334,6 +481,347 @@ function IrisContent() {
         </section>
 
 
+
+        {/* ── HORIZONTAL SCROLL CONTAINER 2 for Tech and Target Partners ──────── */}
+        <div ref={horizontalScrollRef2} className="horizontal-scroll-container">
+          <div className="horizontal-sticky-wrapper">
+            <motion.div
+              className="horizontal-motion-div"
+              style={{
+                x: isMobile ? 0 : horizontalX2,
+              }}
+            >
+
+              {/* ── NEW: Under the Hood (Tech) ───────────────────────────────────── */}
+              <section className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
+                </div>
+                <div style={{ maxWidth: 1400, width: '100%', margin: '0 auto', position: 'relative', zIndex: 10 }}>
+                  <FadeIn>
+                    <h2 style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', color: '#ffffff', textTransform: 'uppercase', textAlign: 'center', marginBottom: '2rem', letterSpacing: '0.02em' }}>
+                      UNDER THE HOOD.
+                    </h2>
+                  </FadeIn>
+                  <style>{`
+              .horizontal-scroll-container {
+                height: 200vh;
+                position: relative;
+              }
+              .horizontal-sticky-wrapper {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+              }
+              .horizontal-motion-div {
+                display: flex;
+                width: 200vw;
+                height: 100%;
+              }
+              .horizontal-section {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                flex-shrink: 0;
+                padding: 8rem 2rem;
+              }
+              .stat-card-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 4rem;
+              }
+              .crop-table-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+              }
+              .circle-cards-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+                margin-bottom: 4rem;
+              }
+              .circle-card-item {
+                width: 280px;
+                height: 280px;
+                border-radius: 50%;
+                background-color: rgba(16,185,129,0.05);
+                border: 2px solid rgba(16,185,129,0.2);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                gap: 1rem;
+              }
+              .section-title {
+                font-family: 'Arial Black','Arial Bold',Arial,Impact,sans-serif;
+                font-weight: 900;
+                font-size: clamp(2rem, 5vw, 4rem);
+                color: #ffffff;
+                text-transform: uppercase;
+                margin-bottom: 4rem;
+                line-height: 1.1;
+                text-align: center;
+              }
+              .market-section-title {
+                font-family: 'Arial Black','Arial Bold',Arial,Impact,sans-serif;
+                font-weight: 900;
+                font-size: clamp(2rem, 4vw, 3.5rem);
+                color: #ffffff;
+                text-transform: uppercase;
+                margin-bottom: 4rem;
+                line-height: 1.1;
+                text-align: center;
+              }
+
+              .scatter-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                position: relative;
+                width: 100%;
+                height: auto;
+              }
+              .scatter-card {
+                position: relative;
+                width: 100%;
+                z-index: 2;
+              }
+              @media (min-width: 1024px) {
+                .scatter-container {
+                  height: 70vh;
+                  display: block;
+                  margin-top: 2rem;
+                }
+                .scatter-card {
+                  position: absolute !important;
+                }
+                .scatter-card-0 { top: 0%; left: 2%; width: 28%; }
+                .scatter-card-1 { top: -5%; left: 70%; width: 28%; }
+                .scatter-card-2 { top: 32%; left: 5%; width: 28%; }
+                .scatter-card-3 { top: 25%; left: 36%; width: 28%; z-index: 5; }
+                .scatter-card-4 { top: 38%; left: 68%; width: 28%; }
+                .scatter-card-5 { top: 68%; left: 15%; width: 28%; }
+                .scatter-card-6 { top: 62%; left: 55%; width: 28%; }
+              }
+
+              @media (max-width: 1023px) {
+                /* Vertical stacking: collapse both horizontal scroll containers */
+                .horizontal-scroll-container {
+                  height: auto !important;
+                }
+                .horizontal-sticky-wrapper {
+                  position: relative !important;
+                  top: auto !important;
+                  height: auto !important;
+                  overflow: visible !important;
+                  display: block !important;
+                }
+                .horizontal-motion-div {
+                  width: 100% !important;
+                  height: auto !important;
+                  flex-direction: column !important;
+                  transform: none !important;
+                }
+                .horizontal-section {
+                  width: 100% !important;
+                  height: auto !important;
+                  min-height: auto !important;
+                  padding: 5rem 1.25rem 3rem 1.25rem !important;
+                }
+
+                /* Inner layout compaction */
+                .stat-card-grid {
+                  grid-template-columns: 1fr 1fr !important;
+                  gap: 1rem !important;
+                  margin-bottom: 1.5rem !important;
+                }
+                .crop-table-grid {
+                  grid-template-columns: 1fr 1fr !important;
+                  gap: 0.75rem !important;
+                }
+                .crop-table-box {
+                  padding: 1rem !important;
+                }
+                .section-title {
+                  margin-bottom: 1.5rem !important;
+                  font-size: 1.5rem !important;
+                }
+                .market-section-title {
+                  margin-bottom: 1.5rem !important;
+                  font-size: 1.5rem !important;
+                }
+
+                /* Circle cards — stack vertically, auto size */
+                .circle-cards-container {
+                  flex-direction: column !important;
+                  align-items: center !important;
+                  gap: 1.25rem !important;
+                  margin-bottom: 2rem !important;
+                }
+                .circle-card-item {
+                  width: clamp(240px, 75vw, 320px) !important;
+                  height: auto !important;
+                  border-radius: 16px !important;
+                  padding: 1.5rem !important;
+                  gap: 0.75rem !important;
+                }
+                .circle-card-title {
+                  font-size: 1.1rem !important;
+                }
+                .circle-card-desc {
+                  font-size: 0.85rem !important;
+                  line-height: 1.4 !important;
+                }
+
+                /* Tech cards — vertical scrollable list */
+                .scatter-container {
+                  display: flex !important;
+                  flex-direction: column !important;
+                  gap: 0.75rem !important;
+                  height: auto !important;
+                }
+                .scatter-card {
+                  position: relative !important;
+                  width: 100% !important;
+                  height: auto !important;
+                }
+
+                /* Partner groups — vertical list */
+                .partners-container {
+                  display: grid !important;
+                  grid-template-columns: 1fr !important;
+                  gap: 1.5rem !important;
+                  max-width: 100% !important;
+                  margin: 0 !important;
+                }
+                .partner-group {
+                  width: 100% !important;
+                  margin-top: 0 !important;
+                }
+                .partner-group-title {
+                  font-size: 1.1rem !important;
+                  margin-bottom: 0.5rem !important;
+                }
+                .partner-group-desc {
+                  font-size: 0.9rem !important;
+                  line-height: 1.5 !important;
+                }
+
+                /* Precision Stats section — auto height, scrollable */
+                .precision-stats-section {
+                  height: auto !important;
+                  overflow: visible !important;
+                  padding: 6rem 1.5rem !important;
+                }
+                .precision-stats-title {
+                  font-size: 2rem !important;
+                  margin-bottom: 1rem !important;
+                }
+                .precision-stats-desc {
+                  font-size: 0.9rem !important;
+                  line-height: 1.5 !important;
+                }
+                .precision-stats-grid {
+                  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+                  gap: 1.25rem !important;
+                  margin-top: 2rem !important;
+                }
+                .precision-stat-card {
+                  padding-left: 1rem !important;
+                }
+                .precision-stat-card-title {
+                  font-size: 1rem !important;
+                  margin-bottom: 0.25rem !important;
+                }
+                .precision-stat-card-desc {
+                  font-size: 0.75rem !important;
+                  line-height: 1.4 !important;
+                }
+              }
+            `}</style>
+                  <div className="scatter-container">
+                    {[
+                      { title: 'ESP32-S3 Core', desc: 'The brain of IRIS. Handles all processing and manages Wi-Fi and Bluetooth data transmission.' },
+                      { title: 'TCS34725 Color Sensor', desc: "Reads the VOC-indicator film's green-to-blue color shift as fruit ripeness progresses." },
+                      { title: 'DHT11 Ambient Sensor', desc: 'Tracks temperature and humidity inside the monitoring chamber for environmental accuracy.' },
+                      { title: 'Airtight Observation Box', desc: 'A controlled environment that ensures accurate, interference-free VOC readings every time.' },
+                      { title: 'Embedded ML Engine', desc: 'Interprets color-change and VOC patterns to classify and predict ripeness stage automatically.' },
+                      { title: 'IoT Data Layer', desc: 'Real-time data logging and remote monitoring via Wi-Fi and Bluetooth to your dashboard.' },
+                      { title: 'On-Device Display', desc: 'Live readout directly on the device. No app required to get an immediate freshness reading.' },
+                    ].map((comp, i) => (
+                      <motion.div
+                        key={i}
+                        className={`scatter-card scatter-card-${i}`}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.8, delay: 0.1 * i }}
+                        animate={{ y: [0, -10, 0] }}
+                        // Add subtle continuous floating after entrance
+                        style={{ backgroundColor: 'rgba(10,15,10,0.85)', backdropFilter: 'blur(12px)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: '16px', padding: '1.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}
+                      >
+                        <div style={{ color: '#10b981', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{comp.title}</div>
+                        <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', lineHeight: 1.5 }}>{comp.desc}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* ── NEW: Target Partners ─────────────────────────────────────────── */}
+              <section className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
+                </div>
+                <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+                  <FadeIn>
+                    <h2 style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', color: '#ffffff', textTransform: 'uppercase', textAlign: 'center', marginBottom: '2rem', letterSpacing: '0.02em' }}>
+                      BUILT FOR THE <span style={{ color: '#10b981' }}>ENTIRE VALUE CHAIN.</span>
+                    </h2>
+                  </FadeIn>
+                  <div className="partners-container" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', maxWidth: 900, margin: '0 auto' }}>
+                    <FadeIn delay={0.2}>
+                      <div className="partner-group">
+                        <h3 className="partner-group-title" style={{ color: '#ffffff', fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem' }}>Cold Storage & Cold-Chain Logistics:</h3>
+                        <p className="partner-group-desc" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.6 }}>Snowman Logistics · DHL Supply Chain India · TCI Express / Gati Kausar · Blue Dart (cold logistics) · State-run cold storages (UP, WB, Punjab, Haryana)</p>
+                      </div>
+                    </FadeIn>
+                    <FadeIn delay={0.3}>
+                      <div className="partner-group">
+                        <h3 className="partner-group-title" style={{ color: '#ffffff', fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem' }}>Organized Retail, Quick-Commerce & Wholesale:</h3>
+                        <p className="partner-group-desc" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.6 }}>Reliance Retail (Fresh / Smart Bazaar) · DMart / Big Bazaar / Spencer's · BigBasket, Blinkit, Zepto, Swiggy Instamart · Nature's Basket / Star Bazaar · APMC / Mandi wholesale markets (Azadpur, Vashi)</p>
+                      </div>
+                    </FadeIn>
+                    <FadeIn delay={0.4}>
+                      <div className="partner-group" style={{ backgroundColor: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '16px', padding: '2rem', marginTop: '1rem' }}>
+                        <h3 style={{ color: '#10b981', fontSize: '1.2rem', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Priority Rollout Regions:</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                          <div>
+                            <strong style={{ color: '#fff' }}>North India (UP, Punjab, Haryana, West Bengal)</strong>
+                            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', margin: '0.25rem 0 0' }}>largest cold storage capacity, potato-dominant.</p>
+                          </div>
+                          <div>
+                            <strong style={{ color: '#fff' }}>West India (Maharashtra, Gujarat)</strong>
+                            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', margin: '0.25rem 0 0' }}>fruit, dairy, and processed food hub with strong organized retail and port connectivity for exports.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </FadeIn>
+                  </div>
+                </div>
+              </section>
+
+            </motion.div>
+          </div>
+        </div>
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <Footer />

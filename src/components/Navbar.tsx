@@ -11,9 +11,9 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { label: 'Home',        href: '/' },
-  { label: 'Guavi Probi', href: '/guavi-probi' },
-  { label: 'Iris',        href: '/iris' },
+  { label: 'HOME',        href: '/' },
+  { label: 'ANVAYA', href: '/guavi-probi' },
+  { label: 'IRIS',        href: '/iris' },
 ];
 
 export default function Navbar({ onConnectClick }: { onConnectClick?: () => void }) {

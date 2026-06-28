@@ -188,15 +188,15 @@ function GuaviProbiContent() {
         >
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }}>
             <h1 style={{ fontFamily: "'Arial Black', 'Arial Bold', Arial, Impact, sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 6vw, 5rem)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 1.5rem 0', lineHeight: 1.1, color: 'rgba(16,185,129,0.95)' }}>
-              GUAVA PROBI
+              ANVAYA
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 'clamp(0.8rem, 1vw, 0.95rem)', letterSpacing: '0.3em', textTransform: 'uppercase', margin: isMobile || isTablet ? '0 auto 2rem' : '0 0 2rem 0', fontWeight: 600 }}>
-              Probiotic Guava Drink
+              One Fruit. One Fermentation. Infinite Possibilities.
             </p>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', lineHeight: 1.8, margin: isMobile || isTablet ? '0 auto 1.5rem' : '0 0 1.5rem 0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-             Guava Probe is an advanced fruit quality assessment solution designed to deliver fast, accurate, and data-driven insights into guava maturity, freshness, and overall quality.  </p>
+              Guava Probi is India's first probiotic guava drink — crafted from 100% whole guava fruit with live probiotic cultures and zero added sugar. No artificial flavours. No preservatives.   </p>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.85rem, 1vw, 0.95rem)', lineHeight: 1.75, margin: isMobile || isTablet ? '0 auto' : '0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-             By enabling informed harvesting decisions, reducing post-harvest losses, and ensuring consistent fruit standards, it empowers growers, distributors, and retailers to improve efficiency, profitability, and sustainability across the agricultural supply chain.
+              Just the natural taste and gut-friendly power of fresh guava, straight from the orchard to your hands.
             </p>
           </motion.div>
         </div>
@@ -338,12 +338,12 @@ function GuaviProbiContent() {
           style={{ maxWidth: 800, textAlign: 'center', zIndex: 10, position: 'relative' }}
         >
           <h2 style={{ fontFamily: "'Arial Black', 'Arial Bold', Arial, Impact, sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 1.5rem', lineHeight: 1.2, color: 'rgba(16,185,129,0.95)' }}>
-            TRANSFORMING FRUIT QUALITY WITH DATA
+            FROM PERISHABLE FRUIT TO POWERFUL NUTRITION
           </h2>
           <p style={{ fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: '1.5rem 0', fontWeight: 400 }}>
-           FV Plus Agrotech combines agricultural expertise, scientific research, and intelligent technologies to revolutionize fruit quality assessment and post-harvest management.</p>
+            FV Plus Agrotech combines ancient fermentation wisdom, scientific research, and precision biotechnology to transform India's most wasted fruits into functional nutrition. </p>
           <p style={{ fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: '1.5rem 0 2rem', fontWeight: 400 }}>
-          Through innovative solutions like Guava Probe, we help stakeholders make smarter decisions, minimize waste, improve product consistency, and create a more sustainable agricultural ecosystem.</p>
+            Through ANVAYA™ — our patented postbiotic ingredient platform — we help farmers recover value from surplus fruit, empower women-led communities, and give food manufacturers clean-label bioactive ingredients that improve gut health, immunity, and metabolic wellness.</p>
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(16,185,129,0.5)' }} whileTap={{ scale: 0.98 }}
             onClick={() => setIsContactOpen(true)}

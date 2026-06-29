@@ -167,6 +167,7 @@ function GuaviProbiContent() {
 
       {/* ══ SECTION 1: HERO ══ */}
       <div
+        id="hero"
         ref={heroRef}
         style={{ width: '100vw', height: '100vh', position: 'relative', backgroundImage: "url('/image.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#040904', display: 'flex', overflow: 'hidden' }}
       >
@@ -222,7 +223,7 @@ function GuaviProbiContent() {
           Center column is transparent — the fixed model shows through it.
           6 steps × 100vh scroll height.
       */}
-      <div ref={timelineRef} style={{ height: `${ALL_STEPS.length * 100}vh`, position: 'relative' }}>
+      <div id="benefits" ref={timelineRef} style={{ height: `${ALL_STEPS.length * 100}vh`, position: 'relative' }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
 
           {/* Background */}
@@ -331,7 +332,7 @@ function GuaviProbiContent() {
       </div>
 
       {/* ══ SECTION 3: CONCLUSION ══ */}
-      <div style={{ width: '100vw', minHeight: '100vh', position: 'relative', backgroundImage: "url('/image.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#040904', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem' }}>
+      <div id="nutrition" style={{ width: '100vw', minHeight: '100vh', position: 'relative', backgroundImage: "url('/image.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#040904', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(4,9,4,0.75)', zIndex: 1 }} />
         <motion.div
           initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }} viewport={{ once: true, amount: 0.3 }}

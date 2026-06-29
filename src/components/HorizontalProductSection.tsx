@@ -206,7 +206,7 @@ export default function HorizontalProductSection() {
     {
     
       title: 'ANVAYA',
-      subtitle: 'POSTBIOTIC GUAVA INGREDIENT',
+      subtitle: 'POSTBIOTIC FRUIT INGREDIENT',
       desc: 'ANVAYA™ transforms fragile, surplus guava into resilient functional nutrition through advanced lacto-fermentation technology. Controlled fermentation converts fruit sugars into bioactive metabolites — generating postbiotics, antioxidants, and organic acids that support gut health. Dehydrated powder form eliminates cold chain requirements. No synthetic additives. No preservatives. One ingredient. Beverages, bakery, dairy, pharma, and wellness.',
      accentColor: '#10b981',
       borderColor: 'rgba(16,185,129,0.2)',

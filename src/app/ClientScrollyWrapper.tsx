@@ -31,19 +31,29 @@ function MainScrollyContent({
         <Navbar onConnectClick={() => setIsContactOpen(true)} />
 
         {/* ① Hero — Framer Iframe */}
-        <UnicornHero />
+        <div id="hero">
+          <UnicornHero />
+        </div>
 
         {/* ② Premium Kernel — full 3D scrollytelling */}
-        <PremiumKernelSection />
+        <div id="premium-kernel">
+          <PremiumKernelSection />
+        </div>
 
         {/* ③ Horizontal track: Product1 → Product2 */}
-        <HorizontalProductSection />
+        <div id="products">
+          <HorizontalProductSection />
+        </div>
 
         {/* ④ Circular gallery */}
-        <CircularGallerySection />
+        <div id="gallery">
+          <CircularGallerySection />
+        </div>
 
         {/* ⑤ Seq2 + Seq3 canvas with content card overlays */}
-        <Seq23Section imageUrls={sequence2Urls} />
+        <div id="sequence">
+          <Seq23Section imageUrls={sequence2Urls} />
+        </div>
 
         <Footer />
       </div>

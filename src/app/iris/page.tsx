@@ -138,7 +138,7 @@ function IrisContent() {
 
         {/* ── 1. Hero ────────────────────────────────────────────────────── */}
         {/* backgroundColor blocks the global image.png; only hero-probe.png shows */}
-        <section style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', backgroundColor: '#020502' }}>
+        <section id="hero" style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', backgroundColor: '#020502' }}>
 
           {/* Hero-probe.png with mouse parallax */}
           <motion.div style={{ position: 'absolute', inset: 0, zIndex: 0, y: heroY, opacity: heroOpacity }}>
@@ -196,7 +196,7 @@ function IrisContent() {
         </section>
 
         {/* ── 2. The Problem — ScrollReveal headline + paragraph ─────────── */}
-        <section style={{ ...sectionBase, minHeight: '80vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem' }}>
+        <section id="problem" style={{ ...sectionBase, minHeight: '80vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem' }}>
           {/* ambient glow */}
           <div style={{ position: 'absolute', top: '10%', left: '15%', width: '40vw', height: '40vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
@@ -231,7 +231,7 @@ function IrisContent() {
         </section>
 
         {/* ── HORIZONTAL SCROLL CONTAINER for Wastage and Market Size ──────── */}
-        <div ref={horizontalScrollRef} className="horizontal-scroll-container">
+        <div id="wastage-container-parent" ref={horizontalScrollRef} className="horizontal-scroll-container">
           <div className="horizontal-sticky-wrapper">
             <motion.div
               className="horizontal-motion-div"
@@ -241,7 +241,7 @@ function IrisContent() {
             >
 
               {/* ── NEW: The Wastage Numbers ─────────────────────────────────────── */}
-              <section className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+              <section id="wastage" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
                   <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
@@ -278,7 +278,7 @@ function IrisContent() {
                         {[
                           { crop: 'Mango', loss: 30, value: '₹14,500 Cr/yr' },
                           { crop: 'Banana', loss: 28, value: '₹12,800 Cr/yr' },
-                          { crop: 'Guava', loss: 35, value: '₹10,200 Cr/yr' },
+                          { crop: 'Fruit', loss: 35, value: '₹10,200 Cr/yr' },
                           { crop: 'Papaya', loss: 40, value: '₹6,400 Cr/yr' },
                         ].map((c, i) => (
                           <div key={i} style={{ display: 'grid', gridTemplateColumns: '90px 1fr 110px', gap: '1rem', alignItems: 'center' }}>
@@ -305,7 +305,7 @@ function IrisContent() {
               </section>
 
               {/* ── NEW: Market Size ─────────────────────────────────────────────── */}
-              <section className="horizontal-section" style={{ display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
+              <section id="market-size" className="horizontal-section" style={{ display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
                   <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
@@ -343,7 +343,7 @@ function IrisContent() {
         </div>
 
         {/* ── 3. Probe Reveal ──────────────────────────────────────────────── */}
-        <section style={{ ...sectionBase, minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem', overflow: 'hidden' }}>
+        <section id="inside-iris" style={{ ...sectionBase, minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem', overflow: 'hidden' }}>
           {/* Orchard backdrop */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
             <img src="/iris/orchard.png" alt="Orchard" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.07 }} />
@@ -394,9 +394,9 @@ function IrisContent() {
         </section>
 
         {/* ── 4. Precision Stats ────────────────────────────────────────────── */}
-        <section className="precision-stats-section" style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+        <section id="stats" className="precision-stats-section" style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0 }}>
-            <img src="/iris/guava-cross-section.png" alt="Guava Cross Section" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
+            <img src="/iris/guava-cross-section.png" alt="Fruit Cross Section" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4,9,4,0.97) 0%, rgba(4,9,4,0.82) 50%, rgba(4,9,4,0.4) 100%)' }} />
           </div>
 
@@ -439,7 +439,7 @@ function IrisContent() {
         </section>
 
         {/* ── 5. Journey ───────────────────────────────────────────────────── */}
-        <section style={{ ...sectionBase, padding: '8rem 2rem' }}>
+        <section id="applications" style={{ ...sectionBase, padding: '8rem 2rem' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <FadeIn>
               <h2 style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 800, fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', color: '#ffffff', textTransform: 'uppercase', textAlign: 'center', marginBottom: '6rem', letterSpacing: '0.02em' }}>
@@ -503,7 +503,7 @@ function IrisContent() {
 
 
         {/* ── HORIZONTAL SCROLL CONTAINER 2 for Tech and Target Partners ──────── */}
-        <div ref={horizontalScrollRef2} className="horizontal-scroll-container">
+        <div id="tech-container-parent" ref={horizontalScrollRef2} className="horizontal-scroll-container">
           <div className="horizontal-sticky-wrapper">
             <motion.div
               className="horizontal-motion-div"
@@ -513,7 +513,7 @@ function IrisContent() {
             >
 
               {/* ── NEW: Under the Hood (Tech) ───────────────────────────────────── */}
-              <section className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+              <section id="tech" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
                   <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
@@ -796,7 +796,7 @@ function IrisContent() {
               </section>
 
               {/* ── NEW: Target Partners ─────────────────────────────────────────── */}
-              <section className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+              <section id="partners" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
                   <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />

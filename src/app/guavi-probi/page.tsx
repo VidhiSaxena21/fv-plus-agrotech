@@ -9,14 +9,14 @@ import { CopyEditorProvider } from '../../components/CopyEditorContext';
 import Footer from '../../components/Footer';
 
 const LEFT_STEPS = [
-  { num: '01', title: 'Whole Guava Goodness', body: 'Crafted from 100% whole guava fruit — no artificial flavours, no preservatives. Every sip delivers the natural taste and nutrition of fresh guava straight from the orchard.', rotY: -0.28 },
+  { num: '01', title: 'Whole Fruit Goodness', body: 'Crafted from 100% whole fruit — no artificial flavours, no preservatives. Every sip delivers the natural taste and nutrition of fresh fruit straight from the orchard.', rotY: -0.28 },
   { num: '02', title: 'Probiotic Power', body: "Packed with live probiotic cultures that promote a healthy gut microbiome, optimise digestion, and support your body's natural physiological balance every single day.", rotY: 0.3 },
-  { num: '03', title: 'Immunity Booster', body: 'Rich in Vitamin C and powerful antioxidants, Guava Probi actively strengthens your immune system, contributing to sustained energy and improved overall well-being.', rotY: 0.9 },
+  { num: '03', title: 'Immunity Booster', body: 'Rich in vitamin C and powerful antioxidants, Anvaya actively strengthens your immune system, contributing to sustained energy and improved overall well-being.', rotY: 0.9 },
 ];
 
 const RIGHT_STEPS = [
-  { num: '04', title: 'No Added Sugar', body: 'Naturally sweetened by the fruit itself — zero refined sugar added. Enjoy the full flavour of guava without the guilt, making it perfect for a health-conscious lifestyle.', rotY: 1.4 },
-  { num: '05', title: 'Farm to Bottle', body: 'Sourced directly from trusted guava farms, processed under strict quality controls to preserve freshness and nutritional integrity from harvest to your hands.', rotY: 1.9 },
+  { num: '04', title: 'No Added Sugar', body: 'Naturally sweetened by the fruit itself — zero refined sugar added. Enjoy the authentic fruit flavour without the guilt, making it perfect for a health-conscious lifestyle.', rotY: 1.4 },
+  { num: '05', title: 'Farm to Bottle', body: 'Sourced directly from trusted fruit farms and processed under strict quality standards to preserve freshness and nutritional integrity from harvest to your hands.', rotY: 1.9 },
   { num: '06', title: 'Gut-Healthy Microbiome', body: 'Supports the growth of beneficial bacteria in your gut, improving nutrient absorption, reducing bloating, and promoting a balanced, resilient digestive system.', rotY: 2.5 },
 ];
 
@@ -194,9 +194,9 @@ function GuaviProbiContent() {
               One Fruit. One Fermentation. Infinite Possibilities.
             </p>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', lineHeight: 1.8, margin: isMobile || isTablet ? '0 auto 1.5rem' : '0 0 1.5rem 0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-              Guava Probi is India&apos;s first probiotic guava drink — crafted from 100% whole guava fruit with live probiotic cultures and zero added sugar. No artificial flavours. No preservatives.   </p>
+              Anvaya is India&apos;s first probiotic fruit drink — crafted from 100% whole fruit with live probiotic cultures and zero added sugar. No artificial flavours. No preservatives.</p>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.85rem, 1vw, 0.95rem)', lineHeight: 1.75, margin: isMobile || isTablet ? '0 auto' : '0', maxWidth: isMobile || isTablet ? '520px' : '95%', fontWeight: 400 }}>
-              Just the natural taste and gut-friendly power of fresh guava, straight from the orchard to your hands.
+              Just the natural goodness and gut-friendly power of fresh fruit, straight from the orchard to your hands.
             </p>
           </motion.div>
         </div>
@@ -233,7 +233,7 @@ function GuaviProbiContent() {
             <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', padding: '16vh 6vw 4vh' }}>
               <div style={{ position: 'absolute', top: '8%', left: '50%', transform: 'translateX(-50%)', zIndex: 1, pointerEvents: 'none' }}>
                 <span style={{ color: 'rgba(16,185,129,0.6)', fontSize: '0.72rem', letterSpacing: '0.32em', textTransform: 'uppercase', fontWeight: 700 }}>
-                  {activeStep < 3 ? 'Why Guava Probi' : 'Benefits'}
+                  {activeStep < 3 ? 'Why Anvaya' : 'Benefits'}
                 </span>
               </div>
 
@@ -291,7 +291,7 @@ function GuaviProbiContent() {
                 <motion.p
                   initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
                   style={{ color: 'rgba(16,185,129,0.85)', fontSize: '0.72rem', letterSpacing: '0.32em', textTransform: 'uppercase', fontWeight: 700, marginBottom: '3rem', marginTop: 0 }}
-                >Why Guava Probi</motion.p>
+                >Why Anvaya</motion.p>
 
                 <div style={{ position: 'relative' }}>
                   {/* Track line */}

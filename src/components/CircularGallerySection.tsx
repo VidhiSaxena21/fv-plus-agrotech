@@ -4,12 +4,12 @@ import { useMemo } from 'react';
 import Carousel3D from './Carousel3D';
 
 const GALLERY_FRAMES = [
-  { image: '/gallery1.png', text: 'Innovation' },
-  { image: '/gallery2.png', text: 'Biotech' },
-  { image: '/gallery3 .png', text: 'Quality' },
-  { image: '/gallery1.png', text: 'Agrotech' },
-  { image: '/gallery2.png', text: 'Processing' },
-  { image: '/gallery3 .png', text: 'Sustainability' },
+  { image: '/gallery1.jpeg', },
+  { image: '/gallery2.png',},
+  { image: '/gallery3 .png', },
+  { image: '/gallery1.jpeg', },
+  { image: '/gallery2.png', },
+  { image: '/gallery3 .png', },
 ];
 
 export default function CircularGallerySection() {

@@ -133,7 +133,10 @@ export default function UnicornHero() {
     setMounted(true);
   }, []);
 
-  const rawSubtitle = copy.hero.subtitle || '';
+  let rawSubtitle = copy.hero.subtitle || '';
+  if (rawSubtitle === "Freshness isn't luck. It's data" || !rawSubtitle) {
+    rawSubtitle = "Driving innovation at the intersection of technology, sustainability, and real-world impact.";
+  }
   const formattedSubtitle = rawSubtitle.startsWith('-') ? rawSubtitle : `-${rawSubtitle}`;
 
   return (
@@ -141,7 +144,7 @@ export default function UnicornHero() {
       {/* Framer Iframe container with overflow-hidden and absolute positioning to clip the watermark at the bottom */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
         <iframe
-          src="https://odd-needs-045326.framer.app/"
+          src="https://energized-adapts-762948.framer.app/"
           className="absolute border-none outline-none"
           style={{
             top: 0,
@@ -174,9 +177,9 @@ export default function UnicornHero() {
               <h1
                 ref={headlineRef}
                 className="corn-hero-headline select-none text-center relative"
-                style={{ fontSize: 'clamp(2.2rem, 7.5vw, 8.5rem)', zIndex: 1, cursor: 'default' }}
+                style={{ fontSize: 'clamp(2.2rem, 6vw, 7.5rem)', zIndex: 1, cursor: 'default' }}
               >
-                FV PLUS AGROTECH.
+                FV Plus Agrotech Innovations
               </h1>
               <ConstellationOverlay containerRef={headlineRef} />
             </div>
@@ -184,7 +187,7 @@ export default function UnicornHero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
-              className="mt-5 text-white/55 text-sm md:text-base font-light tracking-wide text-center max-w-xl"
+              className="mt-5 text-white/95 text-sm md:text-base font-bold tracking-wide text-center max-w-xl"
             >
               {formattedSubtitle}
             </motion.p>

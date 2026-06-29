@@ -254,34 +254,47 @@ function IrisContent() {
                   </FadeIn>
                   <div className="stat-card-grid">
                     {[
-                      { val: '~16 Cr Tonnes', desc: 'Fruits & vegetables produced in India annually — 2nd largest producer globally.' },
-                      { val: '4–5 Cr Tonnes', desc: 'Lost post-harvest every year. That is 30–35% of total production gone before it reaches a consumer.' },
-                      { val: '₹1.5 Lakh Crore', desc: 'Economic loss annually (~$18 Billion USD). 40% of this is avoidable with better monitoring and management.' },
-                      { val: '₹60,000 Crore', desc: 'Recoverable value — the immediate financial opportunity that better post-harvest technology can unlock.' },
+                      { val: '~16 Cr', unit: 'Tonnes', desc: 'Fruits & vegetables produced in India annually — 2nd largest producer globally.' },
+                      { val: '4–5 Cr', unit: 'Tonnes', desc: 'Lost post-harvest every year. That is 30–35% of total production gone before it reaches a consumer.' },
+                      { val: '₹1.5L', unit: 'Crore', desc: 'Economic loss annually (~$18 Billion USD). 40% of this is avoidable with better monitoring.' },
+                      { val: '₹60K', unit: 'Crore', desc: 'Recoverable value — the immediate financial opportunity that better post-harvest technology can unlock.' },
                     ].map((stat, i) => (
                       <FadeIn key={i} delay={0.1 * i}>
-                        <div style={{ borderLeft: '3px solid #10b981', paddingLeft: '1.25rem', height: '100%' }}>
-                          <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>{stat.val}</div>
-                          <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{stat.desc}</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1.5rem 0' }}>
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
+                            <span style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 900, color: '#10b981', lineHeight: 1, fontFamily: "'Arial Black',Arial,sans-serif", letterSpacing: '-0.02em' }}>{stat.val}</span>
+                            <span style={{ fontSize: '1rem', fontWeight: 700, color: 'rgba(16,185,129,0.6)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{stat.unit}</span>
+                          </div>
+                          <div style={{ width: '2rem', height: '2px', background: 'linear-gradient(to right, #10b981, transparent)', borderRadius: '999px' }} />
+                          <div style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>{stat.desc}</div>
                         </div>
                       </FadeIn>
                     ))}
                   </div>
                   <FadeIn delay={0.5}>
-                    <div className="crop-table-box" style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderRadius: '24px', padding: '2rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <h3 style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Wastage by Crop</h3>
-                      <div className="crop-table-grid">
+                    <div style={{ marginTop: '1rem' }}>
+                      <p style={{ color: 'rgba(16,185,129,0.7)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Wastage by Crop</p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {[
-                          { crop: 'Mango', loss: '30%', value: '₹14,500 Cr/yr' },
-                          { crop: 'Banana', loss: '28%', value: '₹12,800 Cr/yr' },
-                          { crop: 'Guava', loss: '35%', value: '₹10,200 Cr/yr' },
-                          { crop: 'Papaya', loss: '40%', value: '₹6,400 Cr/yr' },
+                          { crop: 'Mango', loss: 30, value: '₹14,500 Cr/yr' },
+                          { crop: 'Banana', loss: 28, value: '₹12,800 Cr/yr' },
+                          { crop: 'Guava', loss: 35, value: '₹10,200 Cr/yr' },
+                          { crop: 'Papaya', loss: 40, value: '₹6,400 Cr/yr' },
                         ].map((c, i) => (
-                          <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                            <span style={{ color: '#fbbf24', fontWeight: 700, fontSize: '1.1rem' }}>{c.crop}</span>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
-                              <span>Loss: <span style={{ color: '#fff' }}>{c.loss}</span></span>
-                              <span>{c.value}</span>
+                          <div key={i} style={{ display: 'grid', gridTemplateColumns: '90px 1fr 110px', gap: '1rem', alignItems: 'center' }}>
+                            <span style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 700, fontSize: '0.95rem' }}>{c.crop}</span>
+                            <div style={{ position: 'relative', height: '4px', background: 'rgba(255,255,255,0.06)', borderRadius: '999px', overflow: 'hidden' }}>
+                              <motion.div
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${c.loss * 2}%` }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1.2, delay: 0.1 * i, ease: [0.16,1,0.3,1] }}
+                                style={{ height: '100%', background: 'linear-gradient(to right, #10b981, rgba(16,185,129,0.4))', borderRadius: '999px' }}
+                              />
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
+                              <span style={{ color: '#10b981', fontWeight: 700 }}>{c.loss}%</span>
+                              <span style={{ color: 'rgba(255,255,255,0.45)' }}>{c.value}</span>
                             </div>
                           </div>
                         ))}
@@ -398,20 +411,27 @@ function IrisContent() {
                 IRIS continuously tracks VOC levels to predict spoilage, optimize dispatch, and reduce post-harvest losses in real time — replacing manual inspection and guesswork with accurate, AI-powered insights.</p>
             </FadeIn>
 
-            <div className="precision-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem', marginTop: '4rem', maxWidth: 1000 }}>
+            <div className="precision-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '4rem', maxWidth: 1000 }}>
               {[
-                { title: 'Predict Spoilage Early', desc: 'Detect rising VOC levels before visible decay appears, preventing losses before they spread.', delay: 0.3 },
-                { title: 'Optimize Dispatch', desc: 'Identify which batches are ready to ship and which require more time for peak freshness.', delay: 0.4 },
-                { title: 'Reduce Post-Harvest Losses', desc: 'Continuously monitor fruit quality without handling or damaging a single fruit.', delay: 0.5 },
-                { title: 'Real-Time Visibility', desc: 'Track storage conditions and freshness trends across multiple batches from one dashboard.', delay: 0.6 },
-                { title: 'Data-Driven Decisions', desc: 'Replace manual inspection and guesswork with accurate, AI-powered insights.', delay: 0.7 },
-                { title: 'Maximize Profitability', desc: 'Improve quality consistency, reduce waste, and increase returns across the supply chain.', delay: 0.8 },
+                { num: '01', title: 'Predict Spoilage Early', desc: 'Detect rising VOC levels before visible decay appears, preventing losses before they spread.', delay: 0.3 },
+                { num: '02', title: 'Optimize Dispatch', desc: 'Identify which batches are ready to ship and which require more time for peak freshness.', delay: 0.4 },
+                { num: '03', title: 'Reduce Post-Harvest Losses', desc: 'Continuously monitor fruit quality without handling or damaging a single fruit.', delay: 0.5 },
+                { num: '04', title: 'Real-Time Visibility', desc: 'Track storage conditions and freshness trends across multiple batches from one dashboard.', delay: 0.6 },
+                { num: '05', title: 'Data-Driven Decisions', desc: 'Replace manual inspection and guesswork with accurate, AI-powered insights.', delay: 0.7 },
+                { num: '06', title: 'Maximize Profitability', desc: 'Improve quality consistency, reduce waste, and increase returns across the supply chain.', delay: 0.8 },
               ].map((cap) => (
                 <FadeIn key={cap.title} delay={cap.delay}>
-                  <div className="precision-stat-card" style={{ borderLeft: '3px solid #10b981', paddingLeft: '1.25rem', height: '100%' }}>
-                    <div className="precision-stat-card-title" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>{cap.title}</div>
-                    <div className="precision-stat-card-desc" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{cap.desc}</div>
-                  </div>
+                  <motion.div
+                    className="precision-stat-card"
+                    whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(16,185,129,0.12)' }}
+                    transition={{ duration: 0.25 }}
+                    style={{ background: 'rgba(10,18,10,0.7)', backdropFilter: 'blur(12px)', border: '1px solid rgba(16,185,129,0.1)', borderRadius: '16px', padding: '1.75rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', overflow: 'hidden' }}
+                  >
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, #10b981, transparent)' }} />
+                    <span style={{ fontFamily: 'monospace', fontSize: '0.7rem', fontWeight: 700, color: 'rgba(16,185,129,0.5)', letterSpacing: '0.15em' }}>{cap.num}</span>
+                    <div className="precision-stat-card-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff' }}>{cap.title}</div>
+                    <div className="precision-stat-card-desc" style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, flex: 1 }}>{cap.desc}</div>
+                  </motion.div>
                 </FadeIn>
               ))}
             </div>
@@ -504,7 +524,7 @@ function IrisContent() {
                       UNDER THE HOOD.
                     </h2>
                   </FadeIn>
-                  <style>{`
+                  <style dangerouslySetInnerHTML={{ __html: `
               .horizontal-scroll-container {
                 height: 200vh;
                 position: relative;
@@ -745,7 +765,7 @@ function IrisContent() {
                   line-height: 1.4 !important;
                 }
               }
-            `}</style>
+            ` }} />
                   <div className="scatter-container">
                     {[
                       { title: 'ESP32-S3 Core', desc: 'The brain of IRIS. Handles all processing and manages Wi-Fi and Bluetooth data transmission.' },

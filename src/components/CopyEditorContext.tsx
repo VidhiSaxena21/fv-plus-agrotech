@@ -67,7 +67,7 @@ const defaultCopy: WebsiteCopy = {
   brandLogo: 'FV Plus Agrotech',
   hero: {
     tagline: 'Harvesting Innovation, Cultivating Prosperity',
-    subtitle: "Freshness isn't luck. It's data",
+    subtitle: "Driving innovation at the intersection of technology, sustainability, and real-world impact.",
     intro: 'FV Plus Agrotech Innovations is an emerging player in the field of fresh produce management. We specialize in pioneering and cost-effective technologies for processing fruits and vegetables. Our mission is to tackle food security challenges through cutting-edge solutions.',
   },
   objectives: {

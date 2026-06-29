@@ -9,34 +9,90 @@ import { useCopy } from './CopyEditorContext';
 const SECTION_VH = 250;
 
 function GuavaVisual() {
+  const stats = [
+    {
+      value: '50%',
+      label: 'Food Loss Reduced',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 3v18h18" />
+          <path d="M18.5 16.5L13.5 11.5L9.5 15.5L5.5 11.5" />
+        </svg>
+      )
+    },
+    {
+      value: '$50B',
+      label: 'Global Market',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M2 12h20" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+      )
+    },
+    {
+      value: '100%',
+      label: 'Natural Process',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 22c1.25-3.27 3.3-6.17 5.85-8.47C11.36 10.45 16.34 9 22 9c-5 6.25-9.8 9-16.5 11.5L2 22z" />
+          <path d="M12 13.5l3.5-3.5" />
+        </svg>
+      )
+    },
+    {
+      value: 'JUICES • BAKERY',
+      label: 'Formats',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 22L18 8H6l3 14h6z" />
+          <path d="M14 2l-3 6" />
+        </svg>
+      )
+    }
+  ];
+
   return (
     <div className="relative w-full max-w-[360px] mx-auto">
+      {/* Background glow */}
       <div className="absolute inset-0 rounded-full blur-3xl scale-75" style={{ background: 'rgba(16,185,129,0.18)' }} />
-      <div
-        className="relative rounded-3xl border overflow-hidden"
-        style={{
-          borderColor: 'rgba(16,185,129,0.2)',
-          background: 'linear-gradient(145deg, rgba(16,185,129,0.12) 0%, rgba(6,18,6,0.95) 65%)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: '0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(16,185,129,0.08)',
-        }}
-      >
-        <div className="p-8 space-y-5">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)' }}>
-            <span className="text-2xl">🧬</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2.5">
-            {[['50%', 'Food Loss Reduced'], ['$50B', 'Global Market'], ['100%', 'Natural Process'], ['JUICES · BAKERY', 'Formats']].map(([v, l]) => (
-              <div key={l} className="rounded-xl p-3 text-center" style={{ border: '1px solid rgba(16,185,129,0.15)', background: 'rgba(0,0,0,0.3)' }}>
-                <p className="font-black text-base leading-tight" style={{ color: '#10b981' }}>{v}</p>
-                <p className="text-[10px] font-bold uppercase tracking-wider mt-1" style={{ color: 'rgba(255,255,255,0.35)' }}>{l}</p>
+      
+      {/* List container */}
+      <div className="relative p-6 space-y-7">
+        <div className="flex flex-col gap-6">
+          {stats.map(({ value, label, icon }) => (
+            <div key={label} className="flex items-center gap-5 group">
+              <div 
+                className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105" 
+                style={{ 
+                  border: '1px solid rgba(16,185,129,0.3)', 
+                  background: 'rgba(16,185,129,0.06)',
+                  color: '#10b981'
+                }}
+              >
+                {icon}
               </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-2">
+              <div className="space-y-0.5">
+                <p className="font-black text-2xl tracking-wide leading-none" style={{ color: '#10b981' }}>
+                  {value}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  {label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Footer info (indented under the text, meaning aligned with the dot centered under the icon column) */}
+        <div className="flex items-center gap-5 mt-4">
+          <div className="w-12 flex justify-center shrink-0">
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#10b981' }} />
-            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: 'rgba(16,185,129,0.7)' }}>Postbiotic Active</span>
           </div>
+          <span className="text-[10px] font-black tracking-[0.2em] uppercase" style={{ color: 'rgba(16,185,129,0.8)' }}>
+            Postbiotic Active
+          </span>
         </div>
       </div>
     </div>
@@ -44,39 +100,94 @@ function GuavaVisual() {
 }
 
 function IrisVisual() {
+  const stats = [
+    {
+      value: '4–5 Cr',
+      label: 'Food Lost Annually',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          <line x1="10" y1="11" x2="10" y2="17" />
+          <line x1="14" y1="11" x2="14" y2="17" />
+        </svg>
+      )
+    },
+    {
+      value: '₹1.5L Cr',
+      label: 'Economic Loss',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 5h12M6 9h12M6 13h8.5a4 4 0 0 0 0-8H6M6 13l9 9" />
+        </svg>
+      )
+    },
+    {
+      value: '40%',
+      label: 'Avoidable w/ Better Mgmt',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      )
+    },
+    {
+      value: '₹3,800 Cr',
+      label: 'Market Opportunity',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M23 6l-9.5 9.5-5-5L1 18" />
+          <polyline points="17 6 23 6 23 12" />
+        </svg>
+      )
+    }
+  ];
+
   return (
     <div className="relative w-full max-w-[360px] mx-auto">
+      {/* Background glow */}
       <div className="absolute inset-0 rounded-full blur-3xl scale-75" style={{ background: 'rgba(245,158,11,0.12)' }} />
-      <div
-        className="relative rounded-3xl border overflow-hidden"
-        style={{
-          borderColor: 'rgba(245,158,11,0.2)',
-          background: 'linear-gradient(145deg, rgba(245,158,11,0.1) 0%, rgba(6,18,6,0.95) 65%)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: '0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(245,158,11,0.06)',
-        }}
-      >
-        <div className="p-8 space-y-5">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)' }}>
-            <span className="text-2xl">📡</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2.5">
-            {[['4–5 Cr', 'Food Lost Annually'], ['₹1.5L Cr', 'Economic Loss'], ['40%', 'Avoidable w/ Better Mgmt'], ['₹3,800 Cr', 'Market Opportunity']].map(([v, l]) => (
-              <div key={l} className="rounded-xl p-3 text-center" style={{ border: '1px solid rgba(245,158,11,0.15)', background: 'rgba(0,0,0,0.3)' }}>
-                <p className="font-black text-base leading-tight" style={{ color: '#f59e0b' }}>{v}</p>
-                <p className="text-[10px] font-bold uppercase tracking-wider mt-1" style={{ color: 'rgba(255,255,255,0.35)' }}>{l}</p>
+      
+      {/* List container */}
+      <div className="relative p-6 space-y-7">
+        <div className="flex flex-col gap-6">
+          {stats.map(({ value, label, icon }) => (
+            <div key={label} className="flex items-center gap-5 group">
+              <div 
+                className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105" 
+                style={{ 
+                  border: '1px solid rgba(245,158,11,0.3)', 
+                  background: 'rgba(245,158,11,0.06)',
+                  color: '#f59e0b'
+                }}
+              >
+                {icon}
               </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-2">
+              <div className="space-y-0.5">
+                <p className="font-black text-2xl tracking-wide leading-none" style={{ color: '#f59e0b' }}>
+                  {value}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  {label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Footer info (indented under the text, meaning aligned with the dot centered under the icon column) */}
+        <div className="flex items-center gap-5 mt-4">
+          <div className="w-12 flex justify-center shrink-0">
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f59e0b' }} />
-            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: 'rgba(245,158,11,0.7)' }}>Live Fruit Monitoring</span>
           </div>
+          <span className="text-[10px] font-black tracking-[0.2em] uppercase" style={{ color: 'rgba(245,158,11,0.8)' }}>
+            Live Fruit Monitoring
+          </span>
         </div>
       </div>
     </div>
   );
 }
+
 
 export default function HorizontalProductSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -93,12 +204,11 @@ export default function HorizontalProductSection() {
 
   const panels = [
     {
-      tag: 'Biotech Product',
+    
       title: 'ANVAYA',
       subtitle: 'POSTBIOTIC GUAVA INGREDIENT',
       desc: 'ANVAYA™ transforms fragile, surplus guava into resilient functional nutrition through advanced lacto-fermentation technology. Controlled fermentation converts fruit sugars into bioactive metabolites — generating postbiotics, antioxidants, and organic acids that support gut health. Dehydrated powder form eliminates cold chain requirements. No synthetic additives. No preservatives. One ingredient. Beverages, bakery, dairy, pharma, and wellness.',
-      features: ['🧬 Postbiotic Power', '📦 Shelf-Stable', '🚫 Zero Preservatives', '🏭 B2B Ingredient'],
-      accentColor: '#10b981',
+     accentColor: '#10b981',
       borderColor: 'rgba(16,185,129,0.2)',
       tagStyle: { background: 'rgba(16,185,129,0.08)', color: '#34d399', border: '1px solid rgba(16,185,129,0.2)' },
       visual: <GuavaVisual />,
@@ -136,9 +246,7 @@ export default function HorizontalProductSection() {
               <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
                 {/* Text */}
                 <div className="space-y-3 sm:space-y-4 lg:space-y-5 order-1">
-                  <span className="inline-block px-3 py-1 text-[10px] sm:text-xs tracking-[0.25em] font-bold uppercase rounded-full" style={p.tagStyle}>
-                    {p.tag}
-                  </span>
+                  
                   <h2
                     className="font-black uppercase text-white leading-none tracking-tight"
                     style={{ fontSize: 'clamp(2rem, 8vw, 5rem)' }}
@@ -150,14 +258,7 @@ export default function HorizontalProductSection() {
                   </p>
                   <div className="h-[2px] w-10 rounded-full" style={{ background: p.accentColor }} />
                   <p className="text-gray-300 text-[13px] sm:text-[15px] leading-relaxed font-light max-w-md line-clamp-4 sm:line-clamp-none">{p.desc}</p>
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-0.5">
-                    {p.features.map((f) => (
-                      <span key={f} className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold text-white/80"
-                        style={{ border: `1px solid ${p.borderColor}`, background: 'rgba(0,0,0,0.3)' }}>
-                        {f}
-                      </span>
-                    ))}
-                  </div>
+               
                   <Link
                     href={p.href}
                     className="mt-1 inline-block px-5 py-2 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:opacity-80 text-center"

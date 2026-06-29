@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 type CarouselItem = {
   image: string;
-  text: string;
+  text?: string;
 };
 
 interface Carousel3DProps {
@@ -119,7 +119,7 @@ export default function Carousel3D({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.image}
-                  alt={item.text}
+                  alt={item.text || ''}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   draggable={false}
                 />
@@ -128,11 +128,13 @@ export default function Carousel3D({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
                 {/* Text overlay on the card */}
-                <div className="absolute bottom-0 left-0 w-full p-4 text-center">
-                  <span className="text-white text-sm sm:text-base font-bold uppercase tracking-wider block drop-shadow-md">
-                    {item.text}
-                  </span>
-                </div>
+                {item.text && (
+                  <div className="absolute bottom-0 left-0 w-full p-4 text-center">
+                    <span className="text-white text-sm sm:text-base font-bold uppercase tracking-wider block drop-shadow-md">
+                      {item.text}
+                    </span>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -159,20 +161,22 @@ export default function Carousel3D({
         </button>
 
         {/* Center active text display with micro-animation */}
-        <div className="hidden sm:block pointer-events-auto bg-black/55 backdrop-blur-md px-6 py-2 rounded-full border border-emerald-500/15 shadow-xl">
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={activeIndex}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              transition={{ duration: 0.25 }}
-              className="text-emerald-400 font-bold uppercase text-xs tracking-[0.2em] block"
-            >
-              {items[activeIndex]?.text || ''}
-            </motion.span>
-          </AnimatePresence>
-        </div>
+        {items[activeIndex]?.text && (
+          <div className="hidden sm:block pointer-events-auto bg-black/55 backdrop-blur-md px-6 py-2 rounded-full border border-emerald-500/15 shadow-xl">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeIndex}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.25 }}
+                className="text-emerald-400 font-bold uppercase text-xs tracking-[0.2em] block"
+              >
+                {items[activeIndex]?.text}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+        )}
 
         <button
           onClick={handleNext}

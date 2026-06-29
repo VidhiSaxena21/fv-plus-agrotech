@@ -28,14 +28,25 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
     if (!ctx) return;
     const img = images[Math.round(Math.max(0, Math.min(images.length - 1, index)))];
     if (!img) return;
+
+    // Use cover mode + extra zoom to crop watermarks from all edges
+    const ZOOM = 1.12; // increase to crop more of the frame edges
     const cr = canvas.width / canvas.height;
-    const ir = img.width   / img.height;
-    let dw = canvas.width, dh = canvas.height, ox = 0, oy = 0;
-    if (cr > ir) { dh = canvas.width / ir;  oy = (canvas.height - dh) / 2; }
-    else         { dw = canvas.height * ir; ox = (canvas.width  - dw) / 2; }
+    const ir = img.width / img.height;
+    let dw: number, dh: number;
+    if (cr > ir) {
+      dw = canvas.width * ZOOM;
+      dh = dw / ir;
+    } else {
+      dh = canvas.height * ZOOM;
+      dw = dh * ir;
+    }
+    const ox = (canvas.width  - dw) / 2;
+    const oy = (canvas.height - dh) / 2;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, ox, oy, dw, dh);
   };
+
 
   useMotionValueEvent(frameIndex, 'change', (latest) => {
     const next = Math.round(latest);

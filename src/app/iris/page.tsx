@@ -387,7 +387,7 @@ function IrisContent() {
             <div style={{ flex: 1, position: 'relative', width: '100%', maxWidth: 500 }} className="aspect-square">
               <motion.div style={{ scale: probeScale, rotate: probeRotate, width: '100%', height: '100%', position: 'relative' }}>
                 <div style={{ position: 'absolute', inset: '10%', background: 'radial-gradient(circle, rgba(16,185,129,0.18) 0%, transparent 60%)', filter: 'blur(30px)', borderRadius: '50%' }} className="animate-pulse" />
-                <img src="/iris/probe-in-hand.png" alt="Iris Probe in Hand" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }} />
+                <video src="/iris/White_box.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }} />
               </motion.div>
             </div>
           </div>

@@ -116,7 +116,7 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
       desc: 'We collaborate with commercial farming companies, biotech researchers, and distribution networks globally. Reach out to integrate our agrotech solutions into your operations.',
       socials: [
         { name: 'Email Support', val: 'director@fvplus.in', link: 'mailto:director@fvplus.in' },
-        { name: 'LinkedIn Company', val: 'FV Plus Agrotech', link: 'https://www.linkedin.com/feed/update/urn:li:activity:7469262618789064704' },
+        { name: 'LinkedIn Company', val: 'FV Plus Agrotech Innovations', link: 'https://www.linkedin.com/company/fv-plus-agrotech-innovations/posts/?feedView=all' },
        
       ]
     }

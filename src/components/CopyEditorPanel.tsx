@@ -32,7 +32,7 @@ export default function CopyEditorPanel() {
   const tabs = [
     { id: 'hero', label: 'Hero & Brand' },
     { id: 'objectives', label: 'Objectives' },
-    { id: 'probi', label: 'Guava Probi' },
+    { id: 'probi', label: 'Fruit Probi' },
     { id: 'iris', label: 'IoT & Process' },
     { id: 'assistance', label: 'Services' },
     { id: 'contact', label: 'Contact' },

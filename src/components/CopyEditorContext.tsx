@@ -75,10 +75,10 @@ const defaultCopy: WebsiteCopy = {
     description: 'Our unwavering dedication lies in catalyzing the agri-economy through strategic value addition. We are committed to empowering diverse stakeholders, from farmers and traders to retailers, importers, and exporters. Our mission revolves around pioneering innovative solutions and sustainable practices, aimed at revolutionizing fresh produce management and fostering an environment for all individuals within the agricultural spectrum to thrive and prosper.',
   },
   guavaProbi: {
-    title: 'Guava Probi',
+    title: 'Fruit Probi',
     subtitle: 'Fruit Quality Assessment Solution',
-    description: 'Guava Probi is an advanced fruit quality assessment solution designed to deliver fast, accurate, and data-driven insights into guava maturity, freshness, and overall quality. By enabling informed harvesting decisions, reducing post-harvest losses, and ensuring consistent fruit standards, it empowers growers, distributors, and retailers to improve efficiency, profitability, and sustainability across the supply chain.',
-    whyChooseTitle: 'Why Choose Guava Probi?',
+    description: 'Fruit Probi is an advanced fruit quality assessment solution designed to deliver fast, accurate, and data-driven insights into fruit maturity, freshness, and overall quality. By enabling informed harvesting decisions, reducing post-harvest losses, and ensuring consistent fruit standards, it empowers growers, distributors, and retailers to improve efficiency, profitability, and sustainability across the supply chain.',
+    whyChooseTitle: 'Why Choose Fruit Probi?',
     slogan: 'Highly nutritious and an immunity booster. No added sugar. Natural and preservative free.',
     feature1Title: 'Immunity Booster',
     feature1Desc: 'Boost your immunity with natural probiotics that optimize digestion and enhance overall health.',
@@ -100,7 +100,7 @@ const defaultCopy: WebsiteCopy = {
   },
   rnd: {
     title: 'Research & Development',
-    description: 'Our cutting-edge research focuses on sustainability and innovation in the agriculture sector. We aim to revolutionize the industry through the development of IoT-enabled systems and advanced biotechnology solutions like Guava Probi and IRIS.',
+    description: 'Our cutting-edge research focuses on sustainability and innovation in the agriculture sector. We aim to revolutionize the industry through the development of IoT-enabled systems and advanced biotechnology solutions like Fruit Probi and IRIS.',
     objectives: 'We aim to significantly increase the shelf life of fruits and vegetables while prioritizing the maintenance of their nutritional quality. We aim to enhance crop productivity, minimize waste, and ensure sustainable farming practices for a better future.',
   },
   projectAssistance: {

@@ -85,15 +85,6 @@ function GuavaVisual() {
           ))}
         </div>
         
-        {/* Footer info (indented under the text, meaning aligned with the dot centered under the icon column) */}
-        <div className="flex items-center gap-5 mt-4">
-          <div className="w-12 flex justify-center shrink-0">
-            <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#10b981' }} />
-          </div>
-          <span className="text-[10px] font-black tracking-[0.2em] uppercase" style={{ color: 'rgba(16,185,129,0.8)' }}>
-            Postbiotic Active
-          </span>
-        </div>
       </div>
     </div>
   );
@@ -174,15 +165,6 @@ function IrisVisual() {
           ))}
         </div>
         
-        {/* Footer info (indented under the text, meaning aligned with the dot centered under the icon column) */}
-        <div className="flex items-center gap-5 mt-4">
-          <div className="w-12 flex justify-center shrink-0">
-            <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f59e0b' }} />
-          </div>
-          <span className="text-[10px] font-black tracking-[0.2em] uppercase" style={{ color: 'rgba(245,158,11,0.8)' }}>
-            Live Fruit Monitoring
-          </span>
-        </div>
       </div>
     </div>
   );
@@ -207,7 +189,7 @@ export default function HorizontalProductSection() {
     
       title: 'ANVAYA',
       subtitle: 'POSTBIOTIC FRUIT INGREDIENT',
-      desc: 'ANVAYA™ transforms fragile, surplus guava into resilient functional nutrition through advanced lacto-fermentation technology. Controlled fermentation converts fruit sugars into bioactive metabolites — generating postbiotics, antioxidants, and organic acids that support gut health. Dehydrated powder form eliminates cold chain requirements. No synthetic additives. No preservatives. One ingredient. Beverages, bakery, dairy, pharma, and wellness.',
+      desc: 'ANVAYA™ transforms fragile, surplus fruit into resilient functional nutrition through advanced lacto-fermentation technology. Controlled fermentation converts fruit sugars into bioactive metabolites — generating postbiotics, antioxidants, and organic acids that support gut health. Dehydrated powder form eliminates cold chain requirements. No synthetic additives. No preservatives. One ingredient. Beverages, bakery, dairy, pharma, and wellness.',
      accentColor: '#10b981',
       borderColor: 'rgba(16,185,129,0.2)',
       tagStyle: { background: 'rgba(16,185,129,0.08)', color: '#34d399', border: '1px solid rgba(16,185,129,0.2)' },

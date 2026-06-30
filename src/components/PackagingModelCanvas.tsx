@@ -119,19 +119,27 @@ export default function PackagingModelCanvas({ scrollYProgress, getProgress, mod
     }
 
     const loader = new GLTFLoader();
-    loader.load('/packaging3d/scene.gltf', (gltf) => {
+    loader.load('/plastic_bottle/scene.gltf', (gltf) => {
       const raw = gltf.scene;
       const box = new THREE.Box3().setFromObject(raw);
       const center = box.getCenter(new THREE.Vector3());
       raw.position.sub(center);
+
+      // Normalize size so maximum dimension is 1.0
+      const size = new THREE.Vector3();
+      box.getSize(size);
+      const maxDim = Math.max(size.x, size.y, size.z);
+      if (maxDim > 0) {
+        raw.scale.multiplyScalar(1.0 / maxDim);
+      }
 
       raw.traverse((child) => {
         if (!(child instanceof THREE.Mesh)) return;
         const mats = Array.isArray(child.material) ? child.material : [child.material];
         mats.forEach((m) => {
           if (m instanceof THREE.MeshStandardMaterial) {
-            m.roughness = 0.45;
-            m.metalness = 0.12;
+            m.roughness = 0.25;
+            m.metalness = 0.1;
             m.needsUpdate = true;
           }
         });
@@ -139,10 +147,10 @@ export default function PackagingModelCanvas({ scrollYProgress, getProgress, mod
 
       const getScale = () => {
         const mobile = W / H < 1.05;
-        if (mode === 'story') return mobile ? 3.2 : 5.0; // Make model extremely large for story mode
-        if (mode === 'standalone') return mobile ? 2.4 : 3.6; // Standalone model scale
-        if (mode === 'horizontal') return 2.2;
-        return mobile ? 0.85 : 1.05;
+        if (mode === 'story') return (mobile ? 3.2 : 5.0) * 0.28; // Make model extremely large for story mode
+        if (mode === 'standalone') return (mobile ? 2.4 : 3.6) * 0.28; // Standalone model scale
+        if (mode === 'horizontal') return 2.2 * 0.28;
+        return (mobile ? 0.85 : 1.05) * 0.28;
       };
 
       const pivot = new THREE.Group();
@@ -160,10 +168,10 @@ export default function PackagingModelCanvas({ scrollYProgress, getProgress, mod
       renderer.setSize(W, H);
       const getScale = () => {
         const mobile = W / H < 1.05;
-        if (mode === 'story') return mobile ? 3.2 : 5.0;
-        if (mode === 'standalone') return mobile ? 2.4 : 3.6;
-        if (mode === 'horizontal') return 2.2;
-        return mobile ? 0.85 : 1.05;
+        if (mode === 'story') return (mobile ? 3.2 : 5.0) * 0.28;
+        if (mode === 'standalone') return (mobile ? 2.4 : 3.6) * 0.28;
+        if (mode === 'horizontal') return 2.2 * 0.28;
+        return (mobile ? 0.85 : 1.05) * 0.28;
       };
       if (model) model.scale.setScalar(getScale());
     };

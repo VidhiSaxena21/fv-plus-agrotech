@@ -243,7 +243,7 @@ function IrisContent() {
               {/* ── NEW: The Wastage Numbers ─────────────────────────────────────── */}
               <section id="wastage" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
+                  <img src="/iris/1.jpeg" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
                 </div>
                 <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', position: 'relative', zIndex: 10 }}>
@@ -307,7 +307,7 @@ function IrisContent() {
               {/* ── NEW: Market Size ─────────────────────────────────────────────── */}
               <section id="market-size" className="horizontal-section" style={{ display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
+                  <img src="/iris/2.jpeg" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
                 </div>
                 <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 10 }}>
@@ -387,7 +387,7 @@ function IrisContent() {
             <div style={{ flex: 1, position: 'relative', width: '100%', maxWidth: 500 }} className="aspect-square">
               <motion.div style={{ scale: probeScale, rotate: probeRotate, width: '100%', height: '100%', position: 'relative' }}>
                 <div style={{ position: 'absolute', inset: '10%', background: 'radial-gradient(circle, rgba(16,185,129,0.18) 0%, transparent 60%)', filter: 'blur(30px)', borderRadius: '50%' }} className="animate-pulse" />
-                <video src="/iris/White_box.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }} />
+                <video src="/iris/White_box.mp4" autoPlay loop muted playsInline onTimeUpdate={(e) => { if (e.currentTarget.currentTime >= 6) { e.currentTarget.currentTime = 0; } }} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }} />
               </motion.div>
             </div>
           </div>
@@ -396,7 +396,7 @@ function IrisContent() {
         {/* ── 4. Precision Stats ────────────────────────────────────────────── */}
         <section id="stats" className="precision-stats-section" style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0 }}>
-            <img src="/iris/guava-cross-section.png" alt="Fruit Cross Section" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
+            <img src="/iris/4.png" alt="Fruit Cross Section" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4,9,4,0.97) 0%, rgba(4,9,4,0.82) 50%, rgba(4,9,4,0.4) 100%)' }} />
           </div>
 
@@ -515,7 +515,7 @@ function IrisContent() {
               {/* ── NEW: Under the Hood (Tech) ───────────────────────────────────── */}
               <section id="tech" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
+                  <img src="/iris/3.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
                 </div>
                 <div style={{ maxWidth: 1400, width: '100%', margin: '0 auto', position: 'relative', zIndex: 10 }}>
@@ -798,7 +798,7 @@ function IrisContent() {
               {/* ── NEW: Target Partners ─────────────────────────────────────────── */}
               <section id="partners" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <img src="/imported.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
+                  <img src="/iris/3.png" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
                 </div>
                 <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>

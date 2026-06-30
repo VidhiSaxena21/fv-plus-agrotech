@@ -28,10 +28,12 @@ export default function Footer() {
           </a>
 
           <a
-            href="tel:+919878249089"
+            href="https://www.linkedin.com/company/fv-plus-agrotech-innovations/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white/50 text-sm hover:text-[#10b981] transition-colors"
           >
-            +91 98782 49089
+            LinkedIn
           </a>
         </div>
 

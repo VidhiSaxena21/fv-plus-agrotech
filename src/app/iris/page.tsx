@@ -15,7 +15,7 @@ import Footer from '../../components/Footer';
 import { ScrollyCanvas } from '../../components/Hero/ScrollyCanvas';
 import { HeroOverlay } from '../../components/Hero/HeroOverlay';
 
-const irisFrameUrls = Array.from({ length: 93 }, (_, i) => `/iris/iris/frame_${String(i).padStart(2, '0')}_delay-0.041s.png`);
+const irisFrameUrls = Array.from({ length: 93 }, (_, i) => `/iris/Iris/frame_${String(i).padStart(2, '0')}_delay-0.041s.png`);
 
 /* ─── SVG Icons ─────────────────────────────────────────────────────────────── */
 

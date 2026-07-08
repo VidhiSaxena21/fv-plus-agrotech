@@ -6,9 +6,6 @@ import {
   useScroll,
   useTransform,
   useInView,
-  useMotionValue,
-  useSpring,
-  useMotionValueEvent,
 } from 'framer-motion';
 import Navbar from '../../components/Navbar';
 import ContactModal from '../../components/ContactModal';
@@ -88,33 +85,7 @@ function IrisContent() {
     offset: ['start start', 'end end'],
   });
 
-  /* Mouse parallax for hero */
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 45, damping: 22 });
-  const springY = useSpring(mouseY, { stiffness: 45, damping: 22 });
 
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      mouseX.set(((e.clientX - cx) / cx) * 18);
-      mouseY.set(((e.clientY - cy) / cy) * 12);
-    };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [mouseX, mouseY]);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      mouseX.set(((e.clientX - cx) / cx) * 18);
-      mouseY.set(((e.clientY - cy) / cy) * 12);
-    };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [mouseX, mouseY]);
 
   /* Probe reveal section transforms */
   const probeScale = useTransform(scrollYProgress, [0.15, 0.45], [0.85, 1]);

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import { motion, useTransform, useMotionValueEvent, MotionValue } from 'framer-motion';
+import { useTransform, useMotionValueEvent, MotionValue } from 'framer-motion';
 import { useImageSequence } from './useImageSequence';
 import { CanvasRenderer } from './CanvasRenderer';
 

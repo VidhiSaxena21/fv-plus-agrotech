@@ -8,12 +8,17 @@ import {
   useInView,
   useMotionValue,
   useSpring,
+  useMotionValueEvent,
 } from 'framer-motion';
 import Navbar from '../../components/Navbar';
 import ContactModal from '../../components/ContactModal';
 import { CopyEditorProvider } from '../../components/CopyEditorContext';
 import ScrollReveal from '../../components/ScrollReveal';
 import Footer from '../../components/Footer';
+import { ScrollyCanvas } from '../../components/Hero/ScrollyCanvas';
+import { HeroOverlay } from '../../components/Hero/HeroOverlay';
+
+const irisFrameUrls = Array.from({ length: 93 }, (_, i) => `/iris/iris/frame_${String(i).padStart(2, '0')}_delay-0.041s.png`);
 
 /* ─── SVG Icons ─────────────────────────────────────────────────────────────── */
 
@@ -77,6 +82,12 @@ function IrisContent() {
 
   const { scrollYProgress } = useScroll();
 
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end end'],
+  });
+
   /* Mouse parallax for hero */
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -94,8 +105,16 @@ function IrisContent() {
     return () => window.removeEventListener('mousemove', onMove);
   }, [mouseX, mouseY]);
 
-  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '45%']);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      mouseX.set(((e.clientX - cx) / cx) * 18);
+      mouseY.set(((e.clientY - cy) / cy) * 12);
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, [mouseX, mouseY]);
 
   /* Probe reveal section transforms */
   const probeScale = useTransform(scrollYProgress, [0.15, 0.45], [0.85, 1]);
@@ -131,107 +150,65 @@ function IrisContent() {
     */
     <div style={{ minHeight: '100vh', overflowX: 'clip', backgroundColor: 'transparent' }}>
       {/* Same fixed overlay used on all pages */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-black/40 backdrop-blur-[2px]" />
+      <div className="fixed inset-0 z-0 pointer-events-none" style={{ background: 'rgba(0,17,19,0.55)', backdropFilter: 'blur(2px)' }} />
 
       <div className="relative z-10">
         <Navbar onConnectClick={() => setIsContactOpen(true)} />
 
-        {/* ── 1. Hero ────────────────────────────────────────────────────── */}
-        {/* backgroundColor blocks the global image.png; only hero-probe.png shows */}
-        <section id="hero" style={{ ...sectionBase, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', backgroundColor: '#020502' }}>
-
-          {/* Hero-probe.png with mouse parallax */}
-          <motion.div style={{ position: 'absolute', inset: 0, zIndex: 0, y: heroY, opacity: heroOpacity }}>
-            <motion.div
-              style={{ width: '100%', height: '100%', x: springX, y: springY, scale: 1.08 }}
-              animate={{ scale: [1.08, 1.12, 1.08] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <img src="/iris/hero-probe.png" alt="Iris Probe Hero" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55 }} />
-            </motion.div>
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(2,5,2,0.08) 0%, rgba(2,5,2,0.45) 60%, #020502 100%)' }} />
-          </motion.div>
-          <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', maxWidth: 1000, padding: '0 1.5rem' }}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: 'easeOut' }}
-            >
-              <h1
-                style={{
-                  fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif",
-                  fontWeight: 900,
-                  fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
-                  color: '#ffffff',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  marginBottom: '1.5rem',
-                  lineHeight: 0.95,
-                }}
-              >
-                IRIS <span style={{ color: '#10b981' }}></span>
-              </h1>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
-              style={{ fontSize: 'clamp(1rem, 1.5vw, 1.4rem)', color: 'rgba(255,255,255,0.75)', fontWeight: 300, letterSpacing: '0.05em', maxWidth: 700, margin: '0 auto', lineHeight: 1.6 }}
-            >
-              Freshness Shouldn&apos;t Be a Guessing Game.<br></br>
-              A portable, non-invasive fruit monitoring system powered by IoT, embedded ML, and smart sensors — built for transit and storage.
-            </motion.p>
+        {/* ── BACKGROUND SEQUENCE WRAPPER ── */}
+        <div ref={heroRef} style={{ position: 'relative' }}>
+          
+          <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ zIndex: 0 }}>
+            {/* Cinematic Background Canvas Sequence plays across Hero & Problem */}
+            <ScrollyCanvas imageUrls={irisFrameUrls} progress={heroProgress} />
           </div>
 
-          {/* Scroll cue */}
-          <div style={{ position: 'absolute', bottom: '4%', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, pointerEvents: 'none', opacity: 0.5 }}>
-            <span style={{ color: 'white', fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>Scroll</span>
-            <motion.div
-              animate={{ scaleY: [1, 1.4, 1], opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 1.5, height: 35, background: 'linear-gradient(to bottom, #10b981, transparent)', transformOrigin: 'top' }}
-            />
-          </div>
-        </section>
+          <div style={{ position: 'relative', zIndex: 1, marginTop: '-100vh' }}>
+            {/* ── 1. Hero ────────────────────────────────────────────────────── */}
+            <section id="hero" style={{ ...sectionBase, height: '400vh', backgroundColor: 'transparent', position: 'relative' }}>
+              <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none">
+                {/* Overlay Elements (Title, CTA, Effects) */}
+                <HeroOverlay progress={heroProgress} />
+              </div>
+            </section>
 
-        {/* ── 2. The Problem — ScrollReveal headline + paragraph ─────────── */}
-        <section id="problem" style={{ ...sectionBase, minHeight: '80vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem' }}>
-          {/* ambient glow */}
-          <div style={{ position: 'absolute', top: '10%', left: '15%', width: '40vw', height: '40vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            {/* ── 2. The Problem — ScrollReveal headline + paragraph ─────────── */}
+            <section id="problem" style={{ ...sectionBase, minHeight: '120vh', display: 'flex', alignItems: 'center', padding: '8rem 2rem', backgroundColor: 'transparent' }}>
+              {/* ambient glow */}
+              <div style={{ position: 'absolute', top: '10%', left: '15%', width: '40vw', height: '40vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(18,169,122,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
-          <div style={{ maxWidth: 960, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-            {/* ── BIG headline with word-reveal ── */}
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur
-              baseRotation={4}
-              blurStrength={8}
-              containerClassName="iris-headline-reveal"
-              textClassName="iris-headline-text"
-              wordAnimationEnd="bottom center"
-            >
-              EVERY YEAR, ₹1.5 LAKH CRORE IS LOST. SILENTLY.
-            </ScrollReveal>
+              <div style={{ maxWidth: 960, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+                {/* ── BIG headline with word-reveal ── */}
+                <ScrollReveal
+                  baseOpacity={0}
+                  enableBlur
+                  baseRotation={4}
+                  blurStrength={8}
+                  containerClassName="iris-headline-reveal"
+                  textClassName="iris-headline-text"
+                  wordAnimationEnd="bottom center"
+                >
+                  EVERY YEAR, ₹1.5 LAKH CRORE IS LOST. SILENTLY.
+                </ScrollReveal>
 
-            {/* ── Body paragraph with word-reveal ── */}
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur
-              baseRotation={2}
-              blurStrength={5}
-              containerClassName="iris-body-reveal"
-              textClassName="iris-body-text"
-              wordAnimationEnd="bottom center"
-            >
-              India produces ~16 crore tonnes of fruits and vegetables annually — the 2nd largest globally. Yet 4–5 crore tonnes are lost post-harvest every single year, ~30–35% of total production, before anyone notices. Not in the field. In transit. In storage. In the dark.<br></br>
-              IRIS was built to turn that darkness into data.
-            </ScrollReveal>
-          </div>
-        </section>
+                {/* ── Body paragraph with word-reveal ── */}
+                <ScrollReveal
+                  baseOpacity={0}
+                  enableBlur
+                  baseRotation={2}
+                  blurStrength={5}
+                  containerClassName="iris-body-reveal"
+                  textClassName="iris-body-text"
+                  wordAnimationEnd="bottom center"
+                >
+                  India produces ~16 crore tonnes of fruits and vegetables annually — the 2nd largest globally. Yet 4–5 crore tonnes are lost post-harvest every single year, ~30–35% of total production, before anyone notices. Not in the field. In transit. In storage. In the dark.<br></br>
+                  IRIS was built to turn that darkness into data.
+                </ScrollReveal>
+              </div>
+            </section>
 
-        {/* ── HORIZONTAL SCROLL CONTAINER for Wastage and Market Size ──────── */}
-        <div id="wastage-container-parent" ref={horizontalScrollRef} className="horizontal-scroll-container">
+            {/* ── HORIZONTAL SCROLL CONTAINER for Wastage and Market Size ──────── */}
+            <div id="wastage-container-parent" ref={horizontalScrollRef} className="horizontal-scroll-container" style={{ position: 'relative', zIndex: 10, backgroundColor: 'transparent' }}>
           <div className="horizontal-sticky-wrapper">
             <motion.div
               className="horizontal-motion-div"
@@ -241,15 +218,11 @@ function IrisContent() {
             >
 
               {/* ── NEW: The Wastage Numbers ─────────────────────────────────────── */}
-              <section id="wastage" className="horizontal-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <img src="/iris/1.jpeg" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(2,5,2,0.75)' }} />
-                </div>
+              <section id="wastage" className="horizontal-section wastage-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', position: 'relative', zIndex: 10 }}>
                   <FadeIn>
-                    <h2 className="section-title">
-                      THE WASTAGE NUMBERS —<br /><span style={{ color: '#10b981' }}>AND THE PRIZE FOR SOLVING THEM.</span>
+                    <h2 className="section-title" style={{ letterSpacing: '-0.03em' }}>
+                      THE WASTAGE NUMBERS —<br /><span style={{ color: '#ea9616ff' }}>AND THE PRIZE FOR SOLVING THEM.</span>
                     </h2>
                   </FadeIn>
                   <div className="stat-card-grid">
@@ -261,19 +234,19 @@ function IrisContent() {
                     ].map((stat, i) => (
                       <FadeIn key={i} delay={0.1 * i}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1.5rem 0' }}>
-                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
-                            <span style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 900, color: '#10b981', lineHeight: 1, fontFamily: "'Arial Black',Arial,sans-serif", letterSpacing: '-0.02em' }}>{stat.val}</span>
-                            <span style={{ fontSize: '1rem', fontWeight: 700, color: 'rgba(16,185,129,0.6)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{stat.unit}</span>
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                            <span style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 700, color: '#ea9616ff', lineHeight: 1, fontFamily: 'var(--font-primary)', letterSpacing: '-0.04em' }}>{stat.val}</span>
+                            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#ea9616ff', textTransform: 'uppercase', letterSpacing: '0.2em' }}>{stat.unit}</span>
                           </div>
-                          <div style={{ width: '2rem', height: '2px', background: 'linear-gradient(to right, #10b981, transparent)', borderRadius: '999px' }} />
-                          <div style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>{stat.desc}</div>
+                          <div style={{ width: '1.5rem', height: '1px', background: 'linear-gradient(to right, #ea9616ff, transparent)', borderRadius: '999px' }} />
+                          <div style={{ fontSize: '0.85rem', color: '#b7c0be', lineHeight: 1.65 }}>{stat.desc}</div>
                         </div>
                       </FadeIn>
                     ))}
                   </div>
                   <FadeIn delay={0.5}>
-                    <div style={{ marginTop: '1rem' }}>
-                      <p style={{ color: 'rgba(16,185,129,0.7)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Wastage by Crop</p>
+                    <div style={{ marginTop: '2rem' }}>
+                      <p style={{ color: '#ea9616ff', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '1.25rem', opacity: 0.7 }}>Wastage by Crop</p>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {[
                           { crop: 'Mango', loss: 30, value: '₹14,500 Cr/yr' },
@@ -281,20 +254,20 @@ function IrisContent() {
                           { crop: 'Fruit', loss: 35, value: '₹10,200 Cr/yr' },
                           { crop: 'Papaya', loss: 40, value: '₹6,400 Cr/yr' },
                         ].map((c, i) => (
-                          <div key={i} style={{ display: 'grid', gridTemplateColumns: '90px 1fr 110px', gap: '1rem', alignItems: 'center' }}>
-                            <span style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 700, fontSize: '0.95rem' }}>{c.crop}</span>
-                            <div style={{ position: 'relative', height: '4px', background: 'rgba(255,255,255,0.06)', borderRadius: '999px', overflow: 'hidden' }}>
+                          <div key={i} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 90px', gap: '0.75rem', alignItems: 'center' }}>
+                            <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.9rem', letterSpacing: '-0.01em' }}>{c.crop}</span>
+                            <div style={{ position: 'relative', height: '3px', background: 'rgba(255,255,255,0.05)', borderRadius: '999px', overflow: 'hidden' }}>
                               <motion.div
                                 initial={{ width: 0 }}
                                 whileInView={{ width: `${c.loss * 2}%` }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 1.2, delay: 0.1 * i, ease: [0.16,1,0.3,1] }}
-                                style={{ height: '100%', background: 'linear-gradient(to right, #10b981, rgba(16,185,129,0.4))', borderRadius: '999px' }}
+                                transition={{ duration: 1.4, delay: 0.1 * i, ease: [0.22,1,0.36,1] }}
+                                style={{ height: '100%', background: 'linear-gradient(to right, #ea9616ff, rgba(18,169,122,0.35))', borderRadius: '999px' }}
                               />
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
-                              <span style={{ color: '#10b981', fontWeight: 700 }}>{c.loss}%</span>
-                              <span style={{ color: 'rgba(255,255,255,0.45)' }}>{c.value}</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
+                              <span style={{ color: '#ea9616ff', fontWeight: 600 }}>{c.loss}%</span>
+                              <span style={{ color: '#7c8886' }}>{c.value}</span>
                             </div>
                           </div>
                         ))}
@@ -316,22 +289,46 @@ function IrisContent() {
                       A ₹3,800 CRORE<br /><span style={{ color: '#10b981' }}>GREENFIELD OPPORTUNITY.</span>
                     </h2>
                   </FadeIn>
-                  <div className="circle-cards-container">
-                    {[
-                      { title: 'TAM — ₹2,10,000 Cr', desc: "Total Addressable Market: India's full fruits and vegetables market from farm-gate to consumer." },
-                      { title: 'SAM — ₹38,000 Cr', desc: 'Serviceable Addressable Market: Modern trade, cold chain, and export segment.' },
-                      { title: 'SOM — ₹3,800 Cr', desc: 'Serviceable Obtainable Market: Early adopters across 5 key states in Years 1–3.' },
-                    ].map((circle, i) => (
-                      <FadeIn key={i} delay={0.2 * i}>
-                        <div className="circle-card-item">
-                          <div className="circle-card-title" style={{ color: '#10b981', fontWeight: 800, fontSize: '1.2rem', textAlign: 'center' }}>{circle.title}</div>
-                          <div className="circle-card-desc" style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', textAlign: 'center', lineHeight: 1.5 }}>{circle.desc}</div>
-                        </div>
-                      </FadeIn>
-                    ))}
-                  </div>
+
+                  {/* Single featured opportunity card */}
+                  <FadeIn delay={0.2}>
+                    <motion.div
+                      whileHover={{ scale: 1.015, boxShadow: '0 40px 80px rgba(16,185,129,0.18)' }}
+                      transition={{ duration: 0.35 }}
+                      style={{
+                        maxWidth: 680,
+                        margin: '0 auto 3rem',
+                        background: 'rgba(10,18,10,0.75)',
+                        backdropFilter: 'blur(20px)',
+                        border: '1px solid rgba(16,185,129,0.25)',
+                        borderRadius: '24px',
+                        padding: '4rem 3rem',
+                        boxShadow: '0 0 60px rgba(16,185,129,0.08), 0 20px 40px rgba(0,0,0,0.5)',
+                        position: 'relative',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {/* Top accent glow bar */}
+                      <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(to right, transparent, rgba(16,185,129,0.6), transparent)' }} />
+
+                      <div style={{ fontSize: 'clamp(3.5rem, 8vw, 6rem)', fontWeight: 900, color: '#10b981', lineHeight: 1, letterSpacing: '-0.02em', fontFamily: "'Arial Black',Arial,sans-serif", marginBottom: '0.5rem' }}>
+                        ₹3,800 Cr
+                      </div>
+                      <div style={{ fontSize: '1rem', fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '2rem' }}>
+                        Opportunity Market
+                      </div>
+                      <div style={{ width: '3rem', height: '2px', background: 'linear-gradient(to right, #10b981, transparent)', borderRadius: '999px', margin: '0 auto 2rem' }} />
+                      <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.7, maxWidth: 480, margin: '0 auto' }}>
+                        Projected opportunity across India&apos;s early fruit quality monitoring and post-harvest technology ecosystem.
+                      </p>
+
+                      {/* Bottom corner glow */}
+                      <div style={{ position: 'absolute', bottom: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                    </motion.div>
+                  </FadeIn>
+
                   <FadeIn delay={0.6}>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', maxWidth: 800, margin: '0 auto', lineHeight: 1.6 }}>
+                    <p style={{ color: '#7c8886', fontSize: '0.85rem', maxWidth: 800, margin: '0 auto', lineHeight: 1.7, letterSpacing: '-0.003em' }}>
                       India&apos;s F&amp;V market is growing at ~8% CAGR. Cold chain infrastructure is set to double by 2030 under PM Gati Shakti. Sensor-based quality control is a ₹3,800+ Crore greenfield opportunity with virtually no organized competition today.
                     </p>
                   </FadeIn>
@@ -340,6 +337,9 @@ function IrisContent() {
 
             </motion.div>
           </div>
+        </div>
+
+        </div>
         </div>
 
         {/* ── 3. Probe Reveal ──────────────────────────────────────────────── */}
@@ -353,14 +353,14 @@ function IrisContent() {
           <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: 1200, margin: '0 auto' }} className="flex flex-col lg:flex-row items-center gap-16">
             <div style={{ flex: 1 }}>
               <FadeIn>
-                <span style={{ color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.25em', fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '1rem' }}>Meet the Future</span>
-                <h2 style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 4rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '2rem', lineHeight: 1.1 }}>
+                <span style={{ color: '#12a97a', textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.68rem', fontWeight: 600, display: 'block', marginBottom: '1rem', opacity: 0.8 }}>Meet the Future</span>
+                <h2 style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: 'clamp(1.8rem, 4.5vw, 3.5rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '1.75rem', lineHeight: 1.0, letterSpacing: '-0.03em' }}>
                   Enter the Iris.
                 </h2>
               </FadeIn>
               <FadeIn delay={0.2}>
-                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-                  IRIS is a portable, non-invasive fruit monitoring system that detects ripeness using Volatile Organic Compound (VOC) release — no touching, no damage, no guesswork. Powered by IoT connectivity, embedded machine learning, and smart sensors, it delivers real-time freshness data for multiple fruits simultaneously, built specifically for transit and storage environments. </p>
+                <p style={{ fontSize: '0.88rem', color: '#b7c0be', lineHeight: 1.75, marginBottom: '2.5rem', letterSpacing: '-0.005em' }}>
+                  IRIS is a portable, non-invasive fruit monitoring system that detects ripeness using Volatile Organic Compound (VOC) release — no touching, no damage, no guesswork. Powered by IoT connectivity, embedded machine learning, and smart sensors, it delivers real-time freshness data for multiple fruits simultaneously, built specifically for transit and storage environments.</p>
               </FadeIn>
               <FadeIn delay={0.4}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -371,12 +371,12 @@ function IrisContent() {
                     { icon: <ScanIcon />, title: 'Real-Time IoT Connectivity', desc: 'Live data logging and remote monitoring via Wi-Fi and Bluetooth. Track multiple batches from one dashboard, anywhere.' },
                   ].map((item) => (
                     <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                      <div style={{ width: 52, height: 52, borderRadius: '50%', backgroundColor: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', flexShrink: 0, justifyContent: 'center', color: '#10b981' }}>
+                      <div style={{ width: 48, height: 48, borderRadius: '12px', backgroundColor: 'rgba(18,169,122,0.05)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', flexShrink: 0, justifyContent: 'center', color: '#12a97a' }}>
                         {item.icon}
                       </div>
                       <div>
-                        <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', margin: '0 0 0.2rem' }}>{item.title}</h4>
-                        <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>{item.desc}</p>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#ffffff', margin: '0 0 0.25rem', letterSpacing: '-0.02em' }}>{item.title}</h4>
+                        <p style={{ fontSize: '0.8rem', color: '#b7c0be', margin: 0, lineHeight: 1.65 }}>{item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -402,12 +402,12 @@ function IrisContent() {
 
           <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: 1200, margin: '0 auto', padding: '0 2rem' }}>
             <FadeIn>
-              <h2 className="precision-stats-title" style={{ fontFamily: "'Arial Black','Arial Bold',Arial,Impact,sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-                YOUR STOREHOUSE <br /><span style={{ color: '#10b981' }}>JUST GOT A BRAIN.</span>
+              <h2 className="precision-stats-title" style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 3.8rem)', color: '#ffffff', textTransform: 'uppercase', marginBottom: '1.25rem', lineHeight: 0.98, letterSpacing: '-0.03em' }}>
+                YOUR STOREHOUSE <br /><span style={{ color: '#12a97a' }}>JUST GOT A BRAIN.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="precision-stats-desc" style={{ fontSize: 'clamp(1rem, 1.3vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 650, lineHeight: 1.8 }}>
+              <p className="precision-stats-desc" style={{ fontSize: '0.88rem', color: '#b7c0be', maxWidth: 600, lineHeight: 1.75, letterSpacing: '-0.005em' }}>
                 IRIS continuously tracks VOC levels to predict spoilage, optimize dispatch, and reduce post-harvest losses in real time — replacing manual inspection and guesswork with accurate, AI-powered insights.</p>
             </FadeIn>
 
@@ -423,14 +423,14 @@ function IrisContent() {
                 <FadeIn key={cap.title} delay={cap.delay}>
                   <motion.div
                     className="precision-stat-card"
-                    whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(16,185,129,0.12)' }}
-                    transition={{ duration: 0.25 }}
-                    style={{ background: 'rgba(10,18,10,0.7)', backdropFilter: 'blur(12px)', border: '1px solid rgba(16,185,129,0.1)', borderRadius: '16px', padding: '1.75rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', overflow: 'hidden' }}
+                    whileHover={{ y: -4, boxShadow: '0 24px 48px rgba(0,0,0,0.5), 0 0 24px rgba(18,169,122,0.08)' }}
+                    transition={{ duration: 0.6, ease: [0.22,1,0.36,1] }}
+                    style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.75rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', overflow: 'hidden', boxShadow: '0 24px 48px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)' }}
                   >
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, #10b981, transparent)' }} />
-                    <span style={{ fontFamily: 'monospace', fontSize: '0.7rem', fontWeight: 700, color: 'rgba(16,185,129,0.5)', letterSpacing: '0.15em' }}>{cap.num}</span>
-                    <div className="precision-stat-card-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff' }}>{cap.title}</div>
-                    <div className="precision-stat-card-desc" style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, flex: 1 }}>{cap.desc}</div>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 500, color: 'rgba(18,169,122,0.4)', letterSpacing: '0.2em' }}>{cap.num}</span>
+                    <div className="precision-stat-card-title" style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.02em' }}>{cap.title}</div>
+                    <div className="precision-stat-card-desc" style={{ fontSize: '0.85rem', color: '#b7c0be', lineHeight: 1.65, flex: 1 }}>{cap.desc}</div>
                   </motion.div>
                 </FadeIn>
               ))}
@@ -488,11 +488,11 @@ function IrisContent() {
               ].map((card) => (
                 <FadeIn key={card.title} delay={card.delay}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                    <div style={{ height: 90, width: 90, borderRadius: '20px', backgroundColor: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem', color: '#10b981' }}>
+                    <div style={{ height: 90, width: 90, borderRadius: '20px', backgroundColor: 'rgba(18,169,122,0.05)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem', color: '#12a97a', transition: 'all 0.6s cubic-bezier(0.22,1,0.36,1)' }}>
                       {card.icon}
                     </div>
-                    <h3 style={{ fontFamily: "'Arial Black',Arial,sans-serif", fontSize: '1.4rem', fontWeight: 700, color: '#ffffff', marginBottom: '1rem' }}>{card.title}</h3>
-                    <p style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontSize: '0.95rem' }}>{card.body}</p>
+                    <h3 style={{ fontFamily: 'var(--font-primary)', fontSize: '1.2rem', fontWeight: 600, color: '#ffffff', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>{card.title}</h3>
+                    <p style={{ color: '#b7c0be', lineHeight: 1.75, fontSize: '0.9rem' }}>{card.body}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -543,10 +543,17 @@ function IrisContent() {
               }
               .horizontal-section {
                 width: 100vw;
-                height: 100vh;
+                min-height: 100vh;
+                height: auto;
                 display: flex;
                 flex-shrink: 0;
-                padding: 8rem 2rem;
+                padding: 7rem 3rem 5rem;
+                overflow-y: auto;
+              }
+              .wastage-section {
+                align-items: flex-start;
+                padding-top: 8rem;
+                padding-bottom: 6rem;
               }
               .stat-card-grid {
                 display: grid;
@@ -622,13 +629,11 @@ function IrisContent() {
                 .scatter-card {
                   position: absolute !important;
                 }
-                .scatter-card-0 { top: 0%; left: 2%; width: 28%; }
-                .scatter-card-1 { top: -5%; left: 70%; width: 28%; }
-                .scatter-card-2 { top: 32%; left: 5%; width: 28%; }
-                .scatter-card-3 { top: 25%; left: 36%; width: 28%; z-index: 5; }
-                .scatter-card-4 { top: 38%; left: 68%; width: 28%; }
-                .scatter-card-5 { top: 68%; left: 15%; width: 28%; }
-                .scatter-card-6 { top: 62%; left: 55%; width: 28%; }
+                .scatter-card-0 { top: 0%;  left: 3%;  width: 28%; }
+                .scatter-card-1 { top: -3%; left: 68%; width: 28%; }
+                .scatter-card-2 { top: 35%; left: 6%;  width: 28%; }
+                .scatter-card-3 { top: 28%; left: 37%; width: 28%; z-index: 5; }
+                .scatter-card-4 { top: 42%; left: 68%; width: 28%; }
               }
 
               @media (max-width: 1023px) {
@@ -769,11 +774,9 @@ function IrisContent() {
                   <div className="scatter-container">
                     {[
                       { title: 'ESP32-S3 Core', desc: 'The brain of IRIS. Handles all processing and manages Wi-Fi and Bluetooth data transmission.' },
-                      { title: 'TCS34725 Color Sensor', desc: "Reads the VOC-indicator film's green-to-blue color shift as fruit ripeness progresses." },
-                      { title: 'DHT11 Ambient Sensor', desc: 'Tracks temperature and humidity inside the monitoring chamber for environmental accuracy.' },
                       { title: 'Airtight Observation Box', desc: 'A controlled environment that ensures accurate, interference-free VOC readings every time.' },
                       { title: 'Embedded ML Engine', desc: 'Interprets color-change and VOC patterns to classify and predict ripeness stage automatically.' },
-                      { title: 'IoT Data Layer', desc: 'Real-time data logging and remote monitoring via Wi-Fi and Bluetooth to your dashboard.' },
+                      { title: 'Real-Time Data', desc: 'Real-time data logging and remote monitoring via Wi-Fi and Bluetooth to your dashboard.' },
                       { title: 'On-Device Display', desc: 'Live readout directly on the device. No app required to get an immediate freshness reading.' },
                     ].map((comp, i) => (
                       <motion.div
@@ -782,13 +785,12 @@ function IrisContent() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.8, delay: 0.1 * i }}
-                        animate={{ y: [0, -10, 0] }}
-                        // Add subtle continuous floating after entrance
-                        style={{ backgroundColor: 'rgba(10,15,10,0.85)', backdropFilter: 'blur(12px)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: '16px', padding: '1.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}
+                        transition={{ duration: 1.0, delay: 0.12 * i, ease: [0.22,1,0.36,1] }}
+                        animate={{ y: [0, -8, 0] }}
+                        style={{ backgroundColor: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.75rem', boxShadow: '0 24px 48px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)' }}
                       >
-                        <div style={{ color: '#10b981', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{comp.title}</div>
-                        <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', lineHeight: 1.5 }}>{comp.desc}</div>
+                        <div style={{ color: '#12a97a', fontWeight: 600, fontSize: '1rem', marginBottom: '0.6rem', letterSpacing: '-0.01em' }}>{comp.title}</div>
+                        <div style={{ color: '#b7c0be', fontSize: '0.88rem', lineHeight: 1.65 }}>{comp.desc}</div>
                       </motion.div>
                     ))}
                   </div>
@@ -825,7 +827,7 @@ function IrisContent() {
                         <h3 style={{ color: '#10b981', fontSize: '1.2rem', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Priority Rollout Regions:</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                           <div>
-                            <strong style={{ color: '#fff' }}>North India (UP, Punjab, Haryana, West Bengal)</strong>
+                            <strong style={{ color: '#fff' }}>North India (UP, Punjab, Haryana)</strong>
                             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', margin: '0.25rem 0 0' }}>largest cold storage capacity, potato-dominant.</p>
                           </div>
                           <div>

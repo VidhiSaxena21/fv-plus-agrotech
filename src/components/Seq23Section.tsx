@@ -6,8 +6,8 @@ import { useFrameSequence } from '../hooks/useFrameSequence';
 
 // ─── Scrollytelling canvas for seq2 + seq3 ───────────────────────────────────
 function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
-  const containerRef   = useRef<HTMLDivElement>(null);
-  const canvasRef      = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const renderFrameRef = useRef<number>(0);
 
   const { scrollYProgress } = useScroll({
@@ -41,7 +41,7 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
       dh = canvas.height * ZOOM;
       dw = dh * ir;
     }
-    const ox = (canvas.width  - dw) / 2;
+    const ox = (canvas.width - dw) / 2;
     const oy = (canvas.height - dh) / 2;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, ox, oy, dw, dh);
@@ -71,14 +71,14 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
   useEffect(() => {
     const resize = () => {
       if (!canvasRef.current) return;
-      canvasRef.current.width  = window.innerWidth;
+      canvasRef.current.width = window.innerWidth;
       canvasRef.current.height = window.innerHeight;
       requestAnimationFrame(() => draw(renderFrameRef.current));
     };
     window.addEventListener('resize', resize);
     resize();
     return () => window.removeEventListener('resize', resize);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
 
   // Content configuration for the three phases
@@ -102,22 +102,22 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
       slogan: 'INTELLIGENCE FOR EVERY HARVEST',
       desc: 'Our services combine agricultural expertise, data analytics, and advanced sensing technologies to help growers, distributors, and food businesses make smarter decisions. From fruit quality assessment to post-harvest optimization, we deliver practical solutions that improve efficiency, reduce waste, and maximize value across the supply chain.',
       bullets: [
-         'AI-Powered Fruit Quality Assessment',
-         'Non-Destructive Maturity Analysis',
-         'Post-Harvest Loss Reduction',
-         'Supply Chain Quality Intelligence'
+        'AI-Powered Fruit Quality Assessment',
+        'Non-Destructive Maturity Analysis',
+        'Post-Harvest Loss Reduction',
+        'Supply Chain Quality Intelligence'
       ]
     },
     {
       label: 'CONTACT & SOCIALS',
       num: '03',
       title: 'Partner With Us',
-      slogan: 'Join the Green Revolution',
+      slogan: 'Support us in our journey',
       desc: 'We collaborate with commercial farming companies, biotech researchers, and distribution networks globally. Reach out to integrate our agrotech solutions into your operations.',
       socials: [
         { name: 'Email Support', val: 'director@fvplus.in', link: 'mailto:director@fvplus.in' },
         { name: 'LinkedIn Company', val: 'FV Plus Agrotech Innovations', link: 'https://www.linkedin.com/company/fv-plus-agrotech-innovations/posts/?feedView=all' },
-       
+
       ]
     }
   ];
@@ -130,7 +130,7 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
 
         {/* Centered centerpiece cinematic information card */}
         <div className="absolute inset-0 flex items-center justify-center px-4 pointer-events-none z-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -153,9 +153,8 @@ function Seq23Canvas({ images }: { images: HTMLImageElement[] }) {
                         window.scrollTo({ top: targetScroll, behavior: 'smooth' });
                       }
                     }}
-                    className={`text-xs md:text-sm font-bold tracking-widest transition-all duration-300 relative pb-1.5 ${
-                      activeTab === idx ? 'text-emerald-400' : 'text-gray-500 hover:text-gray-300'
-                    }`}
+                    className={`text-xs md:text-sm font-bold tracking-widest transition-all duration-300 relative pb-1.5 ${activeTab === idx ? 'text-emerald-400' : 'text-gray-500 hover:text-gray-300'
+                      }`}
                   >
                     {tab.label.split(' ')[0]}
                     {activeTab === idx && (

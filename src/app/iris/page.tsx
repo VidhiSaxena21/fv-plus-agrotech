@@ -124,12 +124,12 @@ function IrisContent() {
       <div className="fixed inset-0 z-0 pointer-events-none" style={{ background: 'rgba(0,17,19,0.55)', backdropFilter: 'blur(2px)' }} />
 
       <div className="relative z-10">
-        <Navbar onConnectClick={() => setIsContactOpen(true)} />
+        <Navbar onConnectClick={() => setIsContactOpen(true)} transparent />
 
         {/* ── BACKGROUND SEQUENCE WRAPPER ── */}
         <div ref={heroRef} style={{ position: 'relative' }}>
-          
-          <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ zIndex: 0 }}>
+
+          <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ zIndex: 0, paddingTop: '72px' }}>
             {/* Cinematic Background Canvas Sequence plays across Hero & Problem */}
             <ScrollyCanvas imageUrls={irisFrameUrls} progress={heroProgress} />
           </div>
@@ -180,137 +180,137 @@ function IrisContent() {
 
             {/* ── HORIZONTAL SCROLL CONTAINER for Wastage and Market Size ──────── */}
             <div id="wastage-container-parent" ref={horizontalScrollRef} className="horizontal-scroll-container" style={{ position: 'relative', zIndex: 10, backgroundColor: 'transparent' }}>
-          <div className="horizontal-sticky-wrapper">
-            <motion.div
-              className="horizontal-motion-div"
-              style={{
-                x: isMobile ? 0 : horizontalX,
-              }}
-            >
+              <div className="horizontal-sticky-wrapper">
+                <motion.div
+                  className="horizontal-motion-div"
+                  style={{
+                    x: isMobile ? 0 : horizontalX,
+                  }}
+                >
 
-              {/* ── NEW: The Wastage Numbers ─────────────────────────────────────── */}
-              <section id="wastage" className="horizontal-section wastage-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', position: 'relative', zIndex: 10 }}>
-                  <FadeIn>
-                    <h2 className="section-title" style={{ letterSpacing: '-0.03em' }}>
-                      THE WASTAGE NUMBERS —<br /><span style={{ color: '#ea9616ff' }}>AND THE PRIZE FOR SOLVING THEM.</span>
-                    </h2>
-                  </FadeIn>
-                  <div className="stat-card-grid">
-                    {[
-                      { val: '~16 Cr', unit: 'Tonnes', desc: 'Fruits & vegetables produced in India annually — 2nd largest producer globally.' },
-                      { val: '4–5 Cr', unit: 'Tonnes', desc: 'Lost post-harvest every year. That is 30–35% of total production gone before it reaches a consumer.' },
-                      { val: '₹1.5L', unit: 'Crore', desc: 'Economic loss annually (~$18 Billion USD). 40% of this is avoidable with better monitoring.' },
-                      { val: '₹60K', unit: 'Crore', desc: 'Recoverable value — the immediate financial opportunity that better post-harvest technology can unlock.' },
-                    ].map((stat, i) => (
-                      <FadeIn key={i} delay={0.1 * i}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1.5rem 0' }}>
-                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                            <span style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 700, color: '#ea9616ff', lineHeight: 1, fontFamily: 'var(--font-primary)', letterSpacing: '-0.04em' }}>{stat.val}</span>
-                            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#ea9616ff', textTransform: 'uppercase', letterSpacing: '0.2em' }}>{stat.unit}</span>
-                          </div>
-                          <div style={{ width: '1.5rem', height: '1px', background: 'linear-gradient(to right, #ea9616ff, transparent)', borderRadius: '999px' }} />
-                          <div style={{ fontSize: '0.85rem', color: '#b7c0be', lineHeight: 1.65 }}>{stat.desc}</div>
-                        </div>
+                  {/* ── NEW: The Wastage Numbers ─────────────────────────────────────── */}
+                  <section id="wastage" className="horizontal-section wastage-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', position: 'relative', zIndex: 10 }}>
+                      <FadeIn>
+                        <h2 className="section-title" style={{ letterSpacing: '-0.03em' }}>
+                          THE WASTAGE NUMBERS —<br /><span style={{ color: '#ea9616ff' }}>AND THE PRIZE FOR SOLVING THEM.</span>
+                        </h2>
                       </FadeIn>
-                    ))}
-                  </div>
-                  <FadeIn delay={0.5}>
-                    <div style={{ marginTop: '2rem' }}>
-                      <p style={{ color: '#ea9616ff', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '1.25rem', opacity: 0.7 }}>Wastage by Crop</p>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <div className="stat-card-grid">
                         {[
-                          { crop: 'Mango', loss: 30, value: '₹14,500 Cr/yr' },
-                          { crop: 'Banana', loss: 28, value: '₹12,800 Cr/yr' },
-                          { crop: 'Fruit', loss: 35, value: '₹10,200 Cr/yr' },
-                          { crop: 'Papaya', loss: 40, value: '₹6,400 Cr/yr' },
-                        ].map((c, i) => (
-                          <div key={i} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 90px', gap: '0.75rem', alignItems: 'center' }}>
-                            <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.9rem', letterSpacing: '-0.01em' }}>{c.crop}</span>
-                            <div style={{ position: 'relative', height: '3px', background: 'rgba(255,255,255,0.05)', borderRadius: '999px', overflow: 'hidden' }}>
-                              <motion.div
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${c.loss * 2}%` }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.4, delay: 0.1 * i, ease: [0.22,1,0.36,1] }}
-                                style={{ height: '100%', background: 'linear-gradient(to right, #ea9616ff, rgba(18,169,122,0.35))', borderRadius: '999px' }}
-                              />
+                          { val: '~16 Cr', unit: 'Tonnes', desc: 'Fruits & vegetables produced in India annually — 2nd largest producer globally.' },
+                          { val: '4–5 Cr', unit: 'Tonnes', desc: 'Lost post-harvest every year. That is 30–35% of total production gone before it reaches a consumer.' },
+                          { val: '₹1.5L', unit: 'Crore', desc: 'Economic loss annually (~$18 Billion USD). 40% of this is avoidable with better monitoring.' },
+                          { val: '₹60K', unit: 'Crore', desc: 'Recoverable value — the immediate financial opportunity that better post-harvest technology can unlock.' },
+                        ].map((stat, i) => (
+                          <FadeIn key={i} delay={0.1 * i}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.75rem 0' }}>
+                              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                                <span style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 700, color: '#ea9616ff', lineHeight: 1, fontFamily: 'var(--font-primary)', letterSpacing: '-0.04em' }}>{stat.val}</span>
+                                <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#ea9616ff', textTransform: 'uppercase', letterSpacing: '0.2em' }}>{stat.unit}</span>
+                              </div>
+                              <div style={{ width: '1.5rem', height: '1px', background: 'linear-gradient(to right, #ea9616ff, transparent)', borderRadius: '999px' }} />
+                              <div style={{ fontSize: '0.85rem', color: '#b7c0be', lineHeight: 1.65 }}>{stat.desc}</div>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
-                              <span style={{ color: '#ea9616ff', fontWeight: 600 }}>{c.loss}%</span>
-                              <span style={{ color: '#7c8886' }}>{c.value}</span>
-                            </div>
-                          </div>
+                          </FadeIn>
                         ))}
                       </div>
+                      <FadeIn delay={0.5}>
+                        <div style={{ marginTop: '2rem' }}>
+                          <p style={{ color: '#ea9616ff', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '1.25rem', opacity: 0.7 }}>Wastage by Crop</p>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            {[
+                              { crop: 'Mango', loss: 30, value: '₹14,500 Cr/yr' },
+                              { crop: 'Banana', loss: 28, value: '₹12,800 Cr/yr' },
+                              { crop: 'Fruit', loss: 35, value: '₹10,200 Cr/yr' },
+                              { crop: 'Papaya', loss: 40, value: '₹6,400 Cr/yr' },
+                            ].map((c, i) => (
+                              <div key={i} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 90px', gap: '0.75rem', alignItems: 'center' }}>
+                                <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.9rem', letterSpacing: '-0.01em' }}>{c.crop}</span>
+                                <div style={{ position: 'relative', height: '3px', background: 'rgba(255,255,255,0.05)', borderRadius: '999px', overflow: 'hidden' }}>
+                                  <motion.div
+                                    initial={{ width: 0 }}
+                                    whileInView={{ width: `${c.loss * 2}%` }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 1.4, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] }}
+                                    style={{ height: '100%', background: 'linear-gradient(to right, #ea9616ff, rgba(18,169,122,0.35))', borderRadius: '999px' }}
+                                  />
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
+                                  <span style={{ color: '#ea9616ff', fontWeight: 600 }}>{c.loss}%</span>
+                                  <span style={{ color: '#7c8886' }}>{c.value}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </FadeIn>
                     </div>
-                  </FadeIn>
-                </div>
-              </section>
+                  </section>
 
-              {/* ── NEW: Market Size ─────────────────────────────────────────────── */}
-              <section id="market-size" className="horizontal-section" style={{ display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <img src="/iris/2.jpeg" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
-                </div>
-                <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 10 }}>
-                  <FadeIn>
-                    <h2 className="market-section-title">
-                      A ₹3,800 CRORE<br /><span style={{ color: '#10b981' }}>GREENFIELD OPPORTUNITY.</span>
-                    </h2>
-                  </FadeIn>
+                  {/* ── NEW: Market Size ─────────────────────────────────────────────── */}
+                  <section id="market-size" className="horizontal-section" style={{ display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+                      <img src="/iris/2.jpeg" alt="Background" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,9,4,0.75)' }} />
+                    </div>
+                    <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+                      <FadeIn>
+                        <h2 className="market-section-title">
+                          A ₹3,800 CRORE<br /><span style={{ color: '#10b981' }}>GREENFIELD OPPORTUNITY.</span>
+                        </h2>
+                      </FadeIn>
 
-                  {/* Single featured opportunity card */}
-                  <FadeIn delay={0.2}>
-                    <motion.div
-                      whileHover={{ scale: 1.015, boxShadow: '0 40px 80px rgba(16,185,129,0.18)' }}
-                      transition={{ duration: 0.35 }}
-                      style={{
-                        maxWidth: 680,
-                        margin: '0 auto 3rem',
-                        background: 'rgba(10,18,10,0.75)',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(16,185,129,0.25)',
-                        borderRadius: '24px',
-                        padding: '4rem 3rem',
-                        boxShadow: '0 0 60px rgba(16,185,129,0.08), 0 20px 40px rgba(0,0,0,0.5)',
-                        position: 'relative',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {/* Top accent glow bar */}
-                      <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(to right, transparent, rgba(16,185,129,0.6), transparent)' }} />
+                      {/* Single featured opportunity card */}
+                      <FadeIn delay={0.2}>
+                        <motion.div
+                          whileHover={{ scale: 1.015, boxShadow: '0 40px 80px rgba(16,185,129,0.18)' }}
+                          transition={{ duration: 0.35 }}
+                          style={{
+                            maxWidth: 680,
+                            margin: '0 auto 3rem',
+                            background: 'rgba(10,18,10,0.75)',
+                            backdropFilter: 'blur(20px)',
+                            border: '1px solid rgba(16,185,129,0.25)',
+                            borderRadius: '24px',
+                            padding: '4rem 3rem',
+                            boxShadow: '0 0 60px rgba(16,185,129,0.08), 0 20px 40px rgba(0,0,0,0.5)',
+                            position: 'relative',
+                            overflow: 'hidden',
+                          }}
+                        >
+                          {/* Top accent glow bar */}
+                          <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(to right, transparent, rgba(16,185,129,0.6), transparent)' }} />
 
-                      <div style={{ fontSize: 'clamp(3.5rem, 8vw, 6rem)', fontWeight: 900, color: '#10b981', lineHeight: 1, letterSpacing: '-0.02em', fontFamily: "'Arial Black',Arial,sans-serif", marginBottom: '0.5rem' }}>
-                        ₹3,800 Cr
-                      </div>
-                      <div style={{ fontSize: '1rem', fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '2rem' }}>
-                        Opportunity Market
-                      </div>
-                      <div style={{ width: '3rem', height: '2px', background: 'linear-gradient(to right, #10b981, transparent)', borderRadius: '999px', margin: '0 auto 2rem' }} />
-                      <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.7, maxWidth: 480, margin: '0 auto' }}>
-                        Projected opportunity across India&apos;s early fruit quality monitoring and post-harvest technology ecosystem.
-                      </p>
+                          <div style={{ fontSize: 'clamp(3.5rem, 8vw, 6rem)', fontWeight: 900, color: '#10b981', lineHeight: 1, letterSpacing: '-0.02em', fontFamily: "'Arial Black',Arial,sans-serif", marginBottom: '0.5rem' }}>
+                            ₹3,800 Cr
+                          </div>
+                          <div style={{ fontSize: '1rem', fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '2rem' }}>
+                            Opportunity Market
+                          </div>
+                          <div style={{ width: '3rem', height: '2px', background: 'linear-gradient(to right, #10b981, transparent)', borderRadius: '999px', margin: '0 auto 2rem' }} />
+                          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.7, maxWidth: 480, margin: '0 auto' }}>
+                            Projected opportunity across India&apos;s early fruit quality monitoring and post-harvest technology ecosystem.
+                          </p>
 
-                      {/* Bottom corner glow */}
-                      <div style={{ position: 'absolute', bottom: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
-                    </motion.div>
-                  </FadeIn>
+                          {/* Bottom corner glow */}
+                          <div style={{ position: 'absolute', bottom: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                        </motion.div>
+                      </FadeIn>
 
-                  <FadeIn delay={0.6}>
-                    <p style={{ color: '#7c8886', fontSize: '0.85rem', maxWidth: 800, margin: '0 auto', lineHeight: 1.7, letterSpacing: '-0.003em' }}>
-                      India&apos;s F&amp;V market is growing at ~8% CAGR. Cold chain infrastructure is set to double by 2030 under PM Gati Shakti. Sensor-based quality control is a ₹3,800+ Crore greenfield opportunity with virtually no organized competition today.
-                    </p>
-                  </FadeIn>
-                </div>
-              </section>
+                      <FadeIn delay={0.6}>
+                        <p style={{ color: '#7c8886', fontSize: '0.85rem', maxWidth: 800, margin: '0 auto', lineHeight: 1.7, letterSpacing: '-0.003em' }}>
+                          India&apos;s F&amp;V market is growing at ~8% CAGR. Cold chain infrastructure is set to double by 2030 under PM Gati Shakti. Sensor-based quality control is a ₹3,800+ Crore greenfield opportunity with virtually no organized competition today.
+                        </p>
+                      </FadeIn>
+                    </div>
+                  </section>
 
-            </motion.div>
+                </motion.div>
+              </div>
+            </div>
+
           </div>
-        </div>
-
-        </div>
         </div>
 
         {/* ── 3. Probe Reveal ──────────────────────────────────────────────── */}
@@ -395,7 +395,7 @@ function IrisContent() {
                   <motion.div
                     className="precision-stat-card"
                     whileHover={{ y: -4, boxShadow: '0 24px 48px rgba(0,0,0,0.5), 0 0 24px rgba(18,169,122,0.08)' }}
-                    transition={{ duration: 0.6, ease: [0.22,1,0.36,1] }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.75rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', overflow: 'hidden', boxShadow: '0 24px 48px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)' }}
                   >
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, #10b981, transparent)' }} />
@@ -495,7 +495,8 @@ function IrisContent() {
                       UNDER THE HOOD.
                     </h2>
                   </FadeIn>
-                  <style dangerouslySetInnerHTML={{ __html: `
+                  <style dangerouslySetInnerHTML={{
+                    __html: `
               .horizontal-scroll-container {
                 height: 200vh;
                 position: relative;
@@ -515,22 +516,24 @@ function IrisContent() {
               .horizontal-section {
                 width: 100vw;
                 min-height: 100vh;
-                height: auto;
+                height: 100%;
                 display: flex;
                 flex-shrink: 0;
-                padding: 7rem 3rem 5rem;
+                padding: 5rem 3rem 3rem;
                 overflow-y: auto;
+                box-sizing: border-box;
               }
               .wastage-section {
                 align-items: flex-start;
-                padding-top: 8rem;
-                padding-bottom: 6rem;
+                padding-top: 5rem;
+                padding-bottom: 3rem;
+                overflow-y: auto;
               }
               .stat-card-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 2rem;
-                margin-bottom: 4rem;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 1rem;
+                margin-bottom: 2rem;
               }
               .crop-table-grid {
                 display: grid;
@@ -560,20 +563,20 @@ function IrisContent() {
               .section-title {
                 font-family: 'Arial Black','Arial Bold',Arial,Impact,sans-serif;
                 font-weight: 900;
-                font-size: clamp(2rem, 5vw, 4rem);
+                font-size: clamp(1.5rem, 4vw, 3.2rem);
                 color: #ffffff;
                 text-transform: uppercase;
-                margin-bottom: 4rem;
+                margin-bottom: 1.5rem;
                 line-height: 1.1;
                 text-align: center;
               }
               .market-section-title {
                 font-family: 'Arial Black','Arial Bold',Arial,Impact,sans-serif;
                 font-weight: 900;
-                font-size: clamp(2rem, 4vw, 3.5rem);
+                font-size: clamp(1.5rem, 3.5vw, 3rem);
                 color: #ffffff;
                 text-transform: uppercase;
-                margin-bottom: 4rem;
+                margin-bottom: 2rem;
                 line-height: 1.1;
                 text-align: center;
               }
@@ -756,7 +759,7 @@ function IrisContent() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 1.0, delay: 0.12 * i, ease: [0.22,1,0.36,1] }}
+                        transition={{ duration: 1.0, delay: 0.12 * i, ease: [0.22, 1, 0.36, 1] }}
                         animate={{ y: [0, -8, 0] }}
                         style={{ backgroundColor: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.75rem', boxShadow: '0 24px 48px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)' }}
                       >

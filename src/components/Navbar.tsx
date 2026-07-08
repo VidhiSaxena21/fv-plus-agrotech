@@ -54,7 +54,7 @@ const navLinks: NavLink[] = [
   },
 ];
 
-export default function Navbar({ onConnectClick }: { onConnectClick?: () => void }) {
+export default function Navbar({ onConnectClick, transparent }: { onConnectClick?: () => void; transparent?: boolean }) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -155,21 +155,23 @@ export default function Navbar({ onConnectClick }: { onConnectClick?: () => void
           : 'py-4'
       }`}
     >
-      {/* Glassmorphism background */}
-      <div
-        className="absolute inset-0 transition-all duration-500"
-        style={{
-          background: isScrolled
-            ? 'rgba(4, 9, 4, 0.75)'
-            : 'rgba(4, 9, 4, 0.45)',
-          backdropFilter: `blur(${isScrolled ? 20 : 12}px)`,
-          WebkitBackdropFilter: `blur(${isScrolled ? 20 : 12}px)`,
-          borderBottom: `1px solid rgba(16, 185, 129, ${isScrolled ? 0.15 : 0.08})`,
-          boxShadow: isScrolled
-            ? '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)'
-            : 'none',
-        }}
-      />
+      {/* Glassmorphism background — hidden when transparent prop is set */}
+      {!transparent && (
+        <div
+          className="absolute inset-0 transition-all duration-500"
+          style={{
+            background: isScrolled
+              ? 'rgba(4, 9, 4, 0.75)'
+              : 'rgba(4, 9, 4, 0.45)',
+            backdropFilter: `blur(${isScrolled ? 20 : 12}px)`,
+            WebkitBackdropFilter: `blur(${isScrolled ? 20 : 12}px)`,
+            borderBottom: `1px solid rgba(16, 185, 129, ${isScrolled ? 0.15 : 0.08})`,
+            boxShadow: isScrolled
+              ? '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)'
+              : 'none',
+          }}
+        />
+      )}
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         {/* Logo */}
